@@ -1,0 +1,106 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+class Installer
+  def install!
+    verify_root_of_git_project!
+    create_commitboards_directories
+    install_or_update_snapshooter_script
+    install_post_commit_hook_to_project
+  end
+
+  def verify_root_of_git_project!
+    info 'Checking for existence of git project'
+    @project_dir = `git rev-parse --show-toplevel 2>&1`.strip
+    unless $?.success?
+      error('You need to install git and be inside a git project!')
+    end
+  end
+
+  def create_commitboards_directories
+    @home_dir         = ensure_dir_present File.expand_path('~')
+    @cb_dir           = ensure_dir_present File.join(@home_dir, '.commitboards')
+    @cb_bin_dir       = ensure_dir_present File.join(@cb_dir, 'bin')
+    @cb_executable    = File.join(@cb_bin_dir, 'snapshot')
+    @cb_projects_dir  = ensure_dir_present File.join(@cb_dir, 'projects')
+    # @project_dir is already set
+    @project_name     = @project_dir.split(File::SEPARATOR).last
+    @post_commit_file = ensure_file_present File.join(@project_dir, '.git', 'hooks', 'post-commit')
+  end
+
+  def install_or_update_snapshooter_script
+    `curl -s <%= update_url %> > #{@cb_executable}`
+    FileUtils.chmod(0755, @cb_executable)
+  end
+
+  def install_post_commit_hook_to_project
+    info 'Installing post-commit hook!'
+    if cb_hook?
+      error "Already found a commit hook in '#{@post_commit_file}'. Exiting..."
+    end
+
+    content = post_commit_content
+
+    File.open(@post_commit_file, 'a') do |f|
+      f.write(content)
+      f.chmod 0755
+    end
+     
+    
+    # write to post-commit
+
+  end
+
+  def post_commit_content
+<<-EOS
+#{shebang}### commitboards hook (start) ###
+#{@cb_executable}
+###  commitboards hook (end)  ###
+EOS
+  end
+
+  def cb_hook?
+    File.exists?(@post_commit_file) &&
+      File.read(@post_commit_file).to_s =~ /commitboards.*\(start\)(.*\n)*.*commitboards.*\(end\)/
+  end
+
+  def shebang
+    good_shebang? ? '' : "#!/bin/sh\n\n"
+  end
+
+  def good_shebang?
+    File.read(@post_commit_file).lines.first =~ /^\#\!\/bin\/.*sh/
+  end
+
+private
+  
+  def ensure_dir_present(path)
+    FileUtils.mkdir_p(path) unless File.directory?(path)
+    path
+  end
+
+  def ensure_file_present(path)
+    dir_path, filename = File.split(path)
+    ensure_dir_present(dir_path)
+    FileUtils.touch(path)
+    path
+  end
+
+  COLORS = {:red => 31, :blue => 34, :cyan => 36, :green => 32}
+  def info(message)
+    msg(message, :cyan)
+  end
+
+  def error(message)
+    msg(message, :red)
+    abort('Exiting')
+  end
+
+  def msg(message, color)
+    puts "\033[0;#{COLORS[color]};9m#{message}\033[0m"
+  end
+end
+
+Installer.new().install!
+
