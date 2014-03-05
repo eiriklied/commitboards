@@ -6,6 +6,7 @@ class Installer
   def install!
     verify_root_of_git_project!
     create_commitboards_directories
+    install_or_update_imagesnap
     install_or_update_snapshooter_script
     install_post_commit_hook_to_project
   end
@@ -19,14 +20,20 @@ class Installer
   end
 
   def create_commitboards_directories
-    @home_dir         = ensure_dir_present File.expand_path('~')
-    @cb_dir           = ensure_dir_present File.join(@home_dir, '.commitboards')
-    @cb_bin_dir       = ensure_dir_present File.join(@cb_dir, 'bin')
-    @cb_executable    = File.join(@cb_bin_dir, 'snapshot')
-    @cb_projects_dir  = ensure_dir_present File.join(@cb_dir, 'projects')
+    @home_dir             = ensure_dir_present File.expand_path('~')
+    @cb_dir               = ensure_dir_present File.join(@home_dir, '.commitboards')
+    @cb_bin_dir           = ensure_dir_present File.join(@cb_dir, 'bin')
+    @imagesnap_executable = File.join(@cb_bin_dir, 'imagesnap')
+    @cb_executable        = File.join(@cb_bin_dir, 'snapshot')
+    @cb_projects_dir      = ensure_dir_present File.join(@cb_dir, 'projects')
     # @project_dir is already set
-    @project_name     = @project_dir.split(File::SEPARATOR).last
-    @post_commit_file = ensure_file_present File.join(@project_dir, '.git', 'hooks', 'post-commit')
+    @project_name         = @project_dir.split(File::SEPARATOR).last
+    @post_commit_file     = ensure_file_present File.join(@project_dir, '.git', 'hooks', 'post-commit')
+  end
+
+  def install_or_update_imagesnap
+    `curl -s <%= imagesnap_url %> > #{@imagesnap_executable}`
+    FileUtils.chmod(0755, @imagesnap_executable)
   end
 
   def install_or_update_snapshooter_script
@@ -46,10 +53,6 @@ class Installer
       f.write(content)
       f.chmod 0755
     end
-     
-    
-    # write to post-commit
-
   end
 
   def post_commit_content

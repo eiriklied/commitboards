@@ -8,4 +8,8 @@ class ScriptsController < ApplicationController
   def update
     render 'update.rb.erb'
   end
+
+  def imagesnap
+    send_file 'vendor/imagesnap/imagesnap'
+  end
 end
