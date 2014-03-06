@@ -1,9 +1,16 @@
 Commitboards::Application.routes.draw do
 
-  root to: 'scripts#project_install'
-
   get 'capture' => 'scripts#capture_script', as: 'capture_script'
   get 'imagesnap' => 'scripts#imagesnap', as: 'imagesnap'
+
+  # get  ':board_id' => 'boards#show', as: 'board'
+  # post ':board_id/commits' => 'commits#create', as: 'commits'
+
+  resources :boards, path: '/', only: :show do
+    get :install, on: :member
+    
+    resources :commits, only: :create
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

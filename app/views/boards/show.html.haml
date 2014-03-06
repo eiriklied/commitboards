@@ -1,0 +1,6 @@
+%h1= @board.name
+
+%p Now go install your board:
+
+%pre
+  curl #{install_board_url(@board)} | ruby

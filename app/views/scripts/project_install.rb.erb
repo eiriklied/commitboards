@@ -61,7 +61,7 @@ class Installer
 
   def show_success_message
     success "\nCongrats! Now go and commit! Then visit your board:"
-    success "\n<%= root_url %>\n"
+    success "\n<%= board_url(@board) %>\n"
   end
 
   def post_commit_content_with_comments
@@ -73,7 +73,7 @@ EOS
   end
 
   def post_commit_command
-    "#{@cb_executable}" # probably append board url here
+    "#{@cb_executable} <%= board_commits_url(@board) %>" # probably append board url here
   end
 
   def cb_hook?
