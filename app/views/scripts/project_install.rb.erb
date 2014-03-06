@@ -37,17 +37,20 @@ class Installer
   end
 
   def install_or_update_snapshooter_script
-    `curl -s <%= update_url %> > #{@cb_executable}`
+    `curl -s <%= capture_script_url %> > #{@cb_executable}`
     FileUtils.chmod(0755, @cb_executable)
   end
 
   def install_post_commit_hook_to_project
     info 'Installing post-commit hook!'
-    if cb_hook?
-      error "Already found a commit hook in '#{@post_commit_file}'. Exiting..."
-    end
 
-    content = post_commit_content
+    content = post_commit_content_with_comments
+
+    if cb_hook?
+      warn "Already found a commit hook in '#{@post_commit_file}'."
+      warn "If you want to add the post-commit command yourself, here it is:"
+      puts "\n#{post_commit_command}\n\n"
+    end
 
     File.open(@post_commit_file, 'a') do |f|
       f.write(content)
@@ -55,12 +58,16 @@ class Installer
     end
   end
 
-  def post_commit_content
+  def post_commit_content_with_comments
 <<-EOS
 #{shebang}### commitboards hook (start) ###
-#{@cb_executable}
+#{post_commit_command}
 ###  commitboards hook (end)  ###
 EOS
+  end
+
+  def post_commit_command
+    "#{@cb_executable}" # probably append board url here
   end
 
   def cb_hook?
@@ -90,9 +97,13 @@ private
     path
   end
 
-  COLORS = {:red => 31, :blue => 34, :cyan => 36, :green => 32}
+  COLORS = {:red => 31, :yellow => 33, :cyan => 36, :green => 32}
   def info(message)
     msg(message, :cyan)
+  end
+
+  def warn(message)
+    msg(message, :yellow)
   end
 
   def error(message)

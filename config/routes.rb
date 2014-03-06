@@ -2,7 +2,7 @@ Commitboards::Application.routes.draw do
 
   root to: 'scripts#project_install'
 
-  get 'update' => 'scripts#update', as: 'update'
+  get 'capture' => 'scripts#capture_script', as: 'capture_script'
   get 'imagesnap' => 'scripts#imagesnap', as: 'imagesnap'
 
   # The priority is based upon order of creation: first created -> highest priority.
