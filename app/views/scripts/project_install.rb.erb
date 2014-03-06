@@ -9,6 +9,7 @@ class Installer
     install_or_update_imagesnap
     install_or_update_snapshooter_script
     install_post_commit_hook_to_project
+    show_success_message
   end
 
   def verify_root_of_git_project!
@@ -24,7 +25,7 @@ class Installer
     @cb_dir               = ensure_dir_present File.join(@home_dir, '.commitboards')
     @cb_bin_dir           = ensure_dir_present File.join(@cb_dir, 'bin')
     @imagesnap_executable = File.join(@cb_bin_dir, 'imagesnap')
-    @cb_executable        = File.join(@cb_bin_dir, 'snapshot')
+    @cb_executable        = File.join(@cb_bin_dir, 'capture')
     @cb_projects_dir      = ensure_dir_present File.join(@cb_dir, 'projects')
     # @project_dir is already set
     @project_name         = @project_dir.split(File::SEPARATOR).last
@@ -48,14 +49,19 @@ class Installer
 
     if cb_hook?
       warn "Already found a commit hook in '#{@post_commit_file}'."
-      warn "If you want to add the post-commit command yourself, here it is:"
-      puts "\n#{post_commit_command}\n\n"
+      warn "If you want to add the post-commit command yourself, here it is: #{post_commit_command}"
+      return
     end
 
     File.open(@post_commit_file, 'a') do |f|
       f.write(content)
       f.chmod 0755
     end
+  end
+
+  def show_success_message
+    success "\nCongrats! Now go and commit! Then visit your board:"
+    success "\n<%= root_url %>\n"
   end
 
   def post_commit_content_with_comments
@@ -97,9 +103,13 @@ private
     path
   end
 
-  COLORS = {:red => 31, :yellow => 33, :cyan => 36, :green => 32}
+  COLORS = {:default => 9, :red => 31, :yellow => 33, :cyan => 36, :green => 32}
   def info(message)
     msg(message, :cyan)
+  end
+
+  def success(message)
+    msg(message, :green)
   end
 
   def warn(message)
@@ -111,7 +121,7 @@ private
     abort('Exiting')
   end
 
-  def msg(message, color)
+  def msg(message, color=:default)
     puts "\033[0;#{COLORS[color]};9m#{message}\033[0m"
   end
 end

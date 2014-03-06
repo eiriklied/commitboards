@@ -1,3 +1,45 @@
 #!/usr/bin/env ruby
 
-puts 'installing :)'
+require 'fileutils'
+
+class Capturer
+  def initialize
+    @project_dir          = `git rev-parse --show-toplevel 2>&1`.strip
+    @commit_sha           = `git rev-parse HEAD`.strip
+    @project_name         = ENV['project_name'] || @project_dir.split(File::SEPARATOR).last
+
+    @home_dir             = File.expand_path('~')
+    @cb_dir               = File.join(@home_dir, '.commitboards')
+    @cb_bin_dir           = File.join(@cb_dir, 'bin')
+    @imagesnap_executable = File.join(@cb_bin_dir, 'imagesnap')
+    @cb_executable        = File.join(@cb_bin_dir, 'capture')
+    @cb_projects_dir      = File.join(@cb_dir, 'projects')
+    @cb_project_dir       = ensure_dir_present(File.join(@cb_projects_dir, @project_name))
+  end
+
+  def capture
+    # todo also upload old images that couldn't 
+    # upload because limited connectivity
+    capture_tmp_image
+    get_last_commit_message
+    # upload_to_board
+  end
+
+private
+  def capture_tmp_image
+    FileUtils.cd(@cb_project_dir)
+    `#{@imagesnap_executable} -q -w 1 #{@commit_sha}.jpg`
+    FileUtils.cd(@project_dir)
+  end
+
+  def get_last_commit_message
+    message = `git log --format=%B -n 1 #{@commit_sha}`.strip
+  end
+
+  def ensure_dir_present(path)
+    FileUtils.mkdir_p(path) unless File.directory?(path)
+    path
+  end
+end
+
+Capturer.new.capture
