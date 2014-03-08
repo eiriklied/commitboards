@@ -1,14 +1,15 @@
 Commitboards::Application.routes.draw do
 
-  get 'capture' => 'scripts#capture_script', as: 'capture_script'
-  get 'imagesnap' => 'scripts#imagesnap', as: 'imagesnap'
+  get 'capture'   => 'scripts#capture_script',            as: 'capture_script'
+  get 'bgcapture' => 'scripts#background_capture_script', as: 'background_capture_script'
+  get 'imagesnap' => 'scripts#imagesnap',                 as: 'imagesnap'
 
   # get  ':board_id' => 'boards#show', as: 'board'
   # post ':board_id/commits' => 'commits#create', as: 'commits'
 
   resources :boards, path: '/', only: :show do
     get :install, on: :member
-    
+
     resources :commits, only: :create
   end
 

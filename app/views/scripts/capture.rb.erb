@@ -51,6 +51,10 @@ private
     name    = shellescape opts.fetch(:name)
     project_name = shellescape opts.fetch(:project_name)
     `curl -s -F commit[project]= -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{@commit_sha}.jpg #{@commits_url}`
+
+    if $?
+      puts "Uploaded #{@commit_sha} to #{@commits_url}"
+    end
   end
 
   def ensure_dir_present(path)

@@ -7,7 +7,8 @@ class Installer
     verify_root_of_git_project!
     create_commitboards_directories
     install_or_update_imagesnap
-    install_or_update_snapshooter_script
+    install_or_update_background_capture_script
+    install_or_update_capture_script
     install_post_commit_hook_to_project
     show_success_message
   end
@@ -26,6 +27,7 @@ class Installer
     @cb_bin_dir           = ensure_dir_present File.join(@cb_dir, 'bin')
     @imagesnap_executable = File.join(@cb_bin_dir, 'imagesnap')
     @cb_executable        = File.join(@cb_bin_dir, 'capture')
+    @cb_bg_executable     = File.join(@cb_bin_dir, 'background-capture')
     @cb_projects_dir      = ensure_dir_present File.join(@cb_dir, 'projects')
     # @project_dir is already set
     @project_name         = @project_dir.split(File::SEPARATOR).last
@@ -37,7 +39,12 @@ class Installer
     FileUtils.chmod(0755, @imagesnap_executable)
   end
 
-  def install_or_update_snapshooter_script
+  def install_or_update_background_capture_script
+    `curl -s <%= background_capture_script_url %> > #{@cb_bg_executable}`
+    FileUtils.chmod(0755, @cb_bg_executable)
+  end
+
+  def install_or_update_capture_script
     `curl -s <%= capture_script_url %> > #{@cb_executable}`
     FileUtils.chmod(0755, @cb_executable)
   end
@@ -73,7 +80,7 @@ EOS
   end
 
   def post_commit_command
-    "#{@cb_executable} <%= board_commits_url(@board) %>" # probably append board url here
+    "#{@cb_bg_executable} <%= board_commits_url(@board) %>" # probably append board url here
   end
 
   def cb_hook?
@@ -90,7 +97,7 @@ EOS
   end
 
 private
-  
+
   def ensure_dir_present(path)
     FileUtils.mkdir_p(path) unless File.directory?(path)
     path
@@ -127,4 +134,3 @@ private
 end
 
 Installer.new().install!
-

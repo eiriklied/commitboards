@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+class BackgroundCapturer
+
+  def initialize
+    @home_dir      = File.expand_path('~')
+    @cb_executable = File.join(@home_dir, '.commitboards', 'bin', 'capture')
+    @log_file      = File.join(@home_dir, '.commitboards', 'capture.log')
+  end
+
+  def run_capture
+    puts "Capturing and posting to '#{ARGV.first}'"
+    system "nohup #{@cb_executable} #{ARGV.first} >> #{@log_file} 2>&1 &"
+  end
+
+end
+
+BackgroundCapturer.new.run_capture
