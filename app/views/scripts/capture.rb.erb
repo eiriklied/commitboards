@@ -50,10 +50,11 @@ private
     email   = shellescape opts.fetch(:email)
     name    = shellescape opts.fetch(:name)
     project_name = shellescape opts.fetch(:project_name)
-    `curl -s -F commit[project]= -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{@commit_sha}.jpg #{@commits_url}`
-
-    if $?
+    cmd = "curl -s -F commit[project]= -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{@commit_sha}.jpg #{@commits_url}"
+    if system(cmd)
       puts "Uploaded #{@commit_sha} to #{@commits_url}"
+    else
+      puts "Could not upload #{@commit_sha} to #{@commits_url}"
     end
   end
 

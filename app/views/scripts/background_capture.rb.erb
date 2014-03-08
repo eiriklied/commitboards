@@ -9,8 +9,18 @@ class BackgroundCapturer
   end
 
   def run_capture
-    puts "Capturing and posting to '#{ARGV.first}'"
+    info "Capturing and posting to '#{ARGV.first}'"
     system "nohup #{@cb_executable} #{ARGV.first} >> #{@log_file} 2>&1 &"
+  end
+
+private
+  COLORS = {:default => 9, :red => 31, :yellow => 33, :cyan => 36, :green => 32}
+  def info(message)
+    msg(message, :cyan)
+  end
+
+  def msg(message, color=:default)
+    puts "\033[0;#{COLORS[color]};9m#{message}\033[0m"
   end
 
 end
