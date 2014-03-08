@@ -19,12 +19,12 @@ class Capturer
   end
 
   def capture
-    # todo also upload old images that couldn't 
+    # todo also upload old images that couldn't
     # upload because limited connectivity
     capture_tmp_image
     message = get_last_commit_message
     name, email = get_name_and_email
-    upload_to_board(:name => name, :message => message, :email => email)
+    upload_to_board(:project_name => @project_name, :name => name, :message => message, :email => email)
   end
 
 private
@@ -46,10 +46,11 @@ private
 
   def upload_to_board(opts)
     FileUtils.cd(@cb_project_dir)
-    comment = shellescape opts.fetch(:message)
+    message = shellescape opts.fetch(:message)
     email   = shellescape opts.fetch(:email)
     name    = shellescape opts.fetch(:name)
-    `curl -s -F "commit[comment]=#{comment}" -F "commit[image]=@#{@commit_sha}.jpg" #{@commits_url}`
+    project_name = shellescape opts.fetch(:project_name)
+    `curl -s -F commit[project]= -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{@commit_sha}.jpg #{@commits_url}`
   end
 
   def ensure_dir_present(path)
