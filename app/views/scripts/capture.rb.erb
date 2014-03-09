@@ -5,8 +5,6 @@ require 'fileutils'
 class Capturer
   def initialize
     @project_dir          = `git rev-parse --show-toplevel 2>&1`.strip
-    @commit_sha           = `git rev-parse HEAD`.strip
-    @snapshot_filename    = "#{@commit_sha}.jpg"
     @project_name         = ENV['project_name'] || @project_dir.split(File::SEPARATOR).last
 
     @home_dir             = File.expand_path('~')
@@ -20,24 +18,44 @@ class Capturer
   end
 
   def capture
-    # todo also upload old images that couldn't
-    # upload because limited connectivity
-    capture_tmp_image
-    message = get_last_commit_message
-    name, email = get_name_and_email
-    upload_success = upload_to_board(:project_name => @project_name, :name => name, :message => message, :email => email)
-    clean_uploaded_file if upload_success
+    commit_sha = get_last_commit_sha
+    capture_tmp_image(commit_sha)
+    upload_success = upload(commit_sha)
+    if upload_success
+      upload_previous_captures
+    end
   end
 
 private
-  def capture_tmp_image
-    FileUtils.cd(@cb_project_dir)
-    `#{@imagesnap_executable} -q -w 1 #{@snapshot_filename}`
-    FileUtils.cd(@project_dir)
+
+  def get_last_commit_sha
+    `git rev-parse HEAD`.strip
   end
 
-  def get_last_commit_message
-    message = `git log --format=%B -n 1 #{@commit_sha}`.strip
+  def capture_tmp_image(commit_sha)
+    inside_dir @cb_project_dir do
+      `#{@imagesnap_executable} -q -w 1 #{snapshot_filename(commit_sha)}`
+    end
+  end
+
+  def upload(commit_sha)
+    message = get_commit_message_for(commit_sha)
+    name, email = get_name_and_email
+    upload_success = post_request(
+      :commit_sha => commit_sha,
+      :project_name => @project_name,
+      :name => name,
+      :message => message,
+      :email => email,
+    )
+
+    clean_uploaded_file(commit_sha) if upload_success
+
+    upload_success
+  end
+
+  def get_commit_message_for(commit_sha)
+    message = `git log --format=%B -n 1 #{commit_sha}`.strip
   end
 
   def get_name_and_email
@@ -46,30 +64,64 @@ private
     [name, email]
   end
 
-  def upload_to_board(opts)
-    FileUtils.cd(@cb_project_dir)
-    message = shellescape opts.fetch(:message)
-    email   = shellescape opts.fetch(:email)
-    name    = shellescape opts.fetch(:name)
-    project_name = shellescape opts.fetch(:project_name)
-    upload_response = `curl -s -F commit[project]= -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{@snapshot_filename} #{@commits_url}`
+  def post_request(opts)
+    inside_dir @cb_project_dir do
+      message  = shellescape opts.fetch(:message)
+      email    = shellescape opts.fetch(:email)
+      name     = shellescape opts.fetch(:name)
+      project_name = shellescape opts.fetch(:project_name)
+      commit_sha = opts.fetch(:commit_sha)
+      filename = shellescape snapshot_filename(commit_sha)
 
-    if upload_response == 'ok'
-      puts "Uploaded #{@commit_sha} to #{@commits_url}"
-      return true
-    else
-      puts "Could not upload #{@commit_sha} to #{@commits_url}"
-      return false
+      puts "curl -s -F commit[project]=#{project_name} -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{filename} #{@commits_url}"
+      upload_response = `curl -s -F commit[project]=#{project_name} -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{filename} #{@commits_url}`
+
+      if upload_response == 'ok'
+        puts "Uploaded #{commit_sha} to #{@commits_url}"
+        return true
+      else
+        puts FileUtils.pwd
+        puts "Could not upload #{commit_sha} to #{@commits_url} (got code: #{$?} and response: '#{upload_response}')"
+        return false
+      end
     end
   end
 
-  def clean_uploaded_file
-    FileUtils.rm @snapshot_filename
+  def upload_previous_captures
+    Dir[File.join(@cb_project_dir, '*.jpg')].sort do |f1, f2|
+      File.ctime(f1) <=> File.ctime(f2) # sort by date
+    end.each do |filename|
+      commit_sha = commit_sha_from_filename(filename)
+      upload(commit_sha)
+    end
+  end
+
+  def snapshot_filename(commit_sha)
+    "#{commit_sha}.jpg"
+  end
+
+  def commit_sha_from_filename(filename)
+    filename.match(/([0-9a-f]{40})\.jpg/).captures.first
+  end
+
+  def clean_uploaded_file(commit_sha)
+    inside_dir @cb_project_dir do
+      FileUtils.rm snapshot_filename(commit_sha)
+    end
   end
 
   def ensure_dir_present(path)
     FileUtils.mkdir_p(path) unless File.directory?(path)
     path
+  end
+
+  def inside_dir(dirname)
+    start_dir = FileUtils.pwd
+    FileUtils.cd(dirname)
+
+    yield
+
+    FileUtils.cd(start_dir)
   end
 
   # from http://svn.ruby-lang.org/repos/ruby/trunk/lib/shellwords.rb
