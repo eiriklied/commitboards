@@ -9,8 +9,8 @@ class BackgroundCapturer
   end
 
   def run_capture
-    info "Capturing and posting to '#{ARGV.first}'"
-    system "nohup #{@cb_executable} #{ARGV.first} >> #{@log_file} 2>&1 &"
+    info "Capturing and posting to #{ENV['board_url']}"
+    system "nohup #{@cb_executable} #{ENV['commits_url']} >> #{@log_file} 2>&1 &"
   end
 
 private

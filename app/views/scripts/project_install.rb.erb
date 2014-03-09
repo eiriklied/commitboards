@@ -80,7 +80,7 @@ EOS
   end
 
   def post_commit_command
-    "#{@cb_bg_executable} <%= board_commits_url(@board) %>" # probably append board url here
+    "board_url=<%= board_url(@board) %> commits_url=<%= board_commits_url(@board) %> #{@cb_bg_executable}"
   end
 
   def cb_hook?
