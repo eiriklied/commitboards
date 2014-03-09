@@ -3,7 +3,7 @@ class CommitsController < ApplicationController
   before_filter :load_board
 
   def create
-    render text: 'ok'
+    render nothing: true
   end
 
 

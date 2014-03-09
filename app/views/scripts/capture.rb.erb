@@ -6,6 +6,7 @@ class Capturer
   def initialize
     @project_dir          = `git rev-parse --show-toplevel 2>&1`.strip
     @commit_sha           = `git rev-parse HEAD`.strip
+    @snapshot_filename    = "#{@commit_sha}.jpg"
     @project_name         = ENV['project_name'] || @project_dir.split(File::SEPARATOR).last
 
     @home_dir             = File.expand_path('~')
@@ -24,13 +25,14 @@ class Capturer
     capture_tmp_image
     message = get_last_commit_message
     name, email = get_name_and_email
-    upload_to_board(:project_name => @project_name, :name => name, :message => message, :email => email)
+    upload_success = upload_to_board(:project_name => @project_name, :name => name, :message => message, :email => email)
+    clean_uploaded_file if upload_success
   end
 
 private
   def capture_tmp_image
     FileUtils.cd(@cb_project_dir)
-    `#{@imagesnap_executable} -q -w 1 #{@commit_sha}.jpg`
+    `#{@imagesnap_executable} -q -w 1 #{@snapshot_filename}`
     FileUtils.cd(@project_dir)
   end
 
@@ -50,12 +52,18 @@ private
     email   = shellescape opts.fetch(:email)
     name    = shellescape opts.fetch(:name)
     project_name = shellescape opts.fetch(:project_name)
-    cmd = "curl -s -F commit[project]= -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{@commit_sha}.jpg #{@commits_url}"
+    cmd = "curl -s -F commit[project]= -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{@snapshot_filename} #{@commits_url}"
     if system(cmd)
       puts "Uploaded #{@commit_sha} to #{@commits_url}"
+      return true
     else
       puts "Could not upload #{@commit_sha} to #{@commits_url}"
+      return false
     end
+  end
+
+  def clean_uploaded_file
+    FileUtils.rm @snapshot_filename
   end
 
   def ensure_dir_present(path)
