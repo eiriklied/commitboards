@@ -52,8 +52,9 @@ private
     email   = shellescape opts.fetch(:email)
     name    = shellescape opts.fetch(:name)
     project_name = shellescape opts.fetch(:project_name)
-    cmd = "curl -s -F commit[project]= -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{@snapshot_filename} #{@commits_url}"
-    if system(cmd)
+    upload_response = `curl -s -F commit[project]= -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{@snapshot_filename} #{@commits_url}`
+
+    if upload_response == 'ok'
       puts "Uploaded #{@commit_sha} to #{@commits_url}"
       return true
     else
