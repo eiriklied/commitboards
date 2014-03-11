@@ -41,17 +41,23 @@ private
   def upload(commit_sha)
     message = get_commit_message_for(commit_sha)
     name, email = get_name_and_email
+    commit_timestamp = get_commit_timestamp_for(commit_sha)
     upload_success = post_request(
       :commit_sha => commit_sha,
       :project_name => @project_name,
       :name => name,
       :message => message,
       :email => email,
+      :timestamp => commit_timestamp,
     )
 
     clean_uploaded_file(commit_sha) if upload_success
 
     upload_success
+  end
+
+  def get_commit_timestamp_for(commit_sha)
+    timestamp_str = `git show -s --format=%ct #{commit_sha}`.strip
   end
 
   def get_commit_message_for(commit_sha)
@@ -71,10 +77,10 @@ private
       name     = shellescape opts.fetch(:name)
       project_name = shellescape opts.fetch(:project_name)
       commit_sha = opts.fetch(:commit_sha)
+      timestamp = opts.fetch(:timestamp)
       filename = shellescape snapshot_filename(commit_sha)
 
-      puts "curl -s -F commit[project]=#{project_name} -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{filename} #{@commits_url}"
-      upload_response = `curl -s -F commit[project]=#{project_name} -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{filename} #{@commits_url}`
+      upload_response = `curl -s -F commit[project]=#{project_name} -F commit[timestamp]=#{timestamp} -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{filename} #{@commits_url}`
 
       if upload_response == 'ok'
         puts "Uploaded #{commit_sha} to #{@commits_url}"
