@@ -1,17 +1,18 @@
 Commitboards::Application.routes.draw do
 
-  get 'capture'   => 'scripts#capture_script',            as: 'capture_script'
-  get 'bgcapture' => 'scripts#background_capture_script', as: 'background_capture_script'
-  get 'imagesnap' => 'scripts#imagesnap',                 as: 'imagesnap'
-
-  # get  ':board_id' => 'boards#show', as: 'board'
-  # post ':board_id/commits' => 'commits#create', as: 'commits'
+  scope :downloads do
+    get 'capture'   => 'scripts#capture_script',            as: 'capture_script'
+    get 'bgcapture' => 'scripts#background_capture_script', as: 'background_capture_script'
+    get 'imagesnap' => 'scripts#imagesnap',                 as: 'imagesnap'
+  end
 
   resources :boards, path: '/', only: :show do
     get :install, on: :member
 
     resources :commits, only: :create
   end
+
+  root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
