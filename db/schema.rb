@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140306230124) do
+ActiveRecord::Schema.define(version: 20140319195250) do
 
   create_table "boards", force: true do |t|
     t.string   "name"
@@ -21,5 +21,20 @@ ActiveRecord::Schema.define(version: 20140306230124) do
   end
 
   add_index "boards", ["key"], name: "index_boards_on_key", unique: true
+
+  create_table "commits", force: true do |t|
+    t.string   "project"
+    t.datetime "committed_at"
+    t.string   "email"
+    t.string   "name"
+    t.text     "message"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "board_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

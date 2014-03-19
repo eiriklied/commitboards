@@ -3,6 +3,7 @@ class CommitsController < ApplicationController
   before_filter :load_board
 
   def create
+    success = @board.commits.create!(commit_params)
     render text: 'ok'
   end
 
@@ -10,5 +11,10 @@ class CommitsController < ApplicationController
 private
   def load_board
     @board = Board.find_by!(key: params[:board_id])
+  end
+
+  def commit_params
+    params.require(:commit).permit(:project, :timestamp,
+      :email, :name, :message, :image)
   end
 end
