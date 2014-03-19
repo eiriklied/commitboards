@@ -86,7 +86,6 @@ private
         puts "Uploaded #{commit_sha} to #{@commits_url}"
         return true
       else
-        puts FileUtils.pwd
         puts "Could not upload #{commit_sha} to #{@commits_url} (got code: #{$?} and response: '#{upload_response}')"
         return false
       end
@@ -124,10 +123,11 @@ private
   def inside_dir(dirname)
     start_dir = FileUtils.pwd
     FileUtils.cd(dirname)
-
-    yield
-
-    FileUtils.cd(start_dir)
+    begin
+      yield
+    ensure
+      FileUtils.cd(start_dir)
+    end
   end
 
   # from http://svn.ruby-lang.org/repos/ruby/trunk/lib/shellwords.rb
