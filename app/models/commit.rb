@@ -9,7 +9,6 @@ class Commit < ActiveRecord::Base
 
 
   def timestamp=(timestamp)
-    Rails.logger.warn 'Need to convert this timestamp to a datetime'
-    #self.committed_at = timestamp
+    self.committed_at = DateTime.strptime(timestamp.to_s,'%s')
   end
 end
