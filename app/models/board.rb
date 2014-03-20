@@ -1,6 +1,6 @@
 class Board < ActiveRecord::Base
 
-  has_many :commits
+  has_many :commits, -> { order(committed_at: :desc) }
 
   before_validation :generate_key_unless_present
   validates :key, :name, presence: true

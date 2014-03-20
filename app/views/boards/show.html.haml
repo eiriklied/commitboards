@@ -4,3 +4,7 @@
 
 %pre
   curl #{install_board_url(@board)} | ruby
+
+
+%ul
+  = render @board.commits
