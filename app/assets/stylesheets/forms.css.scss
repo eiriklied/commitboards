@@ -26,3 +26,13 @@ input[type=submit], button {
   cursor: pointer;
   outline: none;
 }
+
+input.code-example {
+  border: 1px solid $indigo;
+  display: inline-block;
+  padding: 20px;
+  border-radius: 5px;
+  width: 800px;
+  text-align: center;
+  font-family: 'Courier New';
+}
