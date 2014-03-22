@@ -9,4 +9,4 @@
   = form_for Board.new do |f|
     %p.tagline Create a selfie board now and start sharing selfies
     = f.text_field :name, placeholder: 'Board name'
-    = f.submit 'Go!'
+    = f.submit 'Go!', id: 'create_board'
