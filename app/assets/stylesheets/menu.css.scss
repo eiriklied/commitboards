@@ -1,0 +1,36 @@
+@import "colorscheme";
+
+$menu-height: 70px;
+
+.menu {
+  position: absolute;
+  z-index: 1;
+  left:0; top:0; right:0;
+  height: $menu-height;
+  padding:12px 30px;
+  box-sizing: border-box;
+  background-color: $indigo;
+
+  h1 {
+    float:left;
+    margin:3px 0 0 0;
+    color: $white;
+  }
+}
+
+.menu-items {
+  float: right;
+  list-style-type: none;
+  margin-top: 12px;
+  li {
+    display: inline-block;
+    padding: 0 10px;
+  }
+  a {
+    color: $white;
+  }
+}
+
+.with-menu {
+  padding-top: $menu-height;
+}
