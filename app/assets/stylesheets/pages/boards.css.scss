@@ -1,0 +1,26 @@
+.commits {
+  list-style-type: none;
+  margin:0;
+  padding:0 0 0 20px;
+  li{
+    width: 33.3%;
+    padding: 20px 20px 0 0;
+    float: left;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: relative;
+  }
+  img {
+    width: 100%;
+    border-radius: 5px;
+  }
+  .message {
+    position: absolute;
+    bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    left:20px; right:20px;
+    color: $white;
+    text-align: center;
+  }
+}

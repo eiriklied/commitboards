@@ -9,6 +9,7 @@ $menu-height: 70px;
   height: $menu-height;
   padding:12px 30px;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
   background-color: $indigo;
 
   h1 {
