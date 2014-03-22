@@ -11,7 +11,7 @@ body {
 h1 {
   color: $indigo;
   font-weight: normal;
-  font-weight: 100;
+  font-weight: 200;
   font-size: 33px;
 
   &.mega {
@@ -26,7 +26,7 @@ p {
 }
 
 a {
-  color: $blue1;
+  color: $blue2;
   text-decoration: none;
 }
 
@@ -38,4 +38,11 @@ a {
 
 .center {
   text-align: center;
+}
+
+.code-example {
+  border: 1px solid $indigo;
+  display: inline-block;
+  padding: 20px;
+  border-radius: 5px;
 }

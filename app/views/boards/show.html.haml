@@ -1,10 +1,14 @@
-%h1= @board.name
+- title @board.name
+.center
+  %h1= @board.name
 
-%p Now go install your board:
+  %p Now install your board to start uploading selfies.
+  %p Just paste the command below into your shell to install to your project.
+  %P You can install commitboards to as many git projects as you like.
 
-%pre
-  curl #{install_board_url(@board)} | ruby
+  %pre.code-example
+    curl #{install_board_url(@board)} | ruby
 
 
-%ul.commits
-  = render @board.commits
+  %ul.commits
+    = render @board.commits

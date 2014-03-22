@@ -10,6 +10,6 @@ describe 'create a board' do
     expect(Board.count).to eq(1)
     @board = Board.last
 
-    expect(current_path).to eq(board_path(@board))
+    expect(current_path).to eq(board_path @board)
   end
 end

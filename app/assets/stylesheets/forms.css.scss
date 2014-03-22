@@ -8,6 +8,11 @@ input[type=text], textarea {
   border-radius: 5px;
   color: $gray;
   box-sizing: border-box;
+  outline: none;
+
+  &:focus {
+    border-color: $indigo-light;
+  }
 }
 
 input[type=submit], button {
@@ -19,4 +24,5 @@ input[type=submit], button {
   font-size: 16px;
   box-sizing: border-box;
   cursor: pointer;
+  outline: none;
 }
