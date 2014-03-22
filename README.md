@@ -4,7 +4,10 @@
 
 ## small todos
 
-- get github url
+- add committer and project name to commit
+- add commit sha to commit
+- get github url/add github link to commit
+- resize images with imagemagic/imagesnap
 - obey $http_proxy / $https_proxy
 - add board key/url to post-commit start/end comments to be able to add more commit board urls to one project?
 
