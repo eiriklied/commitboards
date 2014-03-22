@@ -1,0 +1,22 @@
+@import "colorscheme";
+
+input[type=text], textarea {
+  border: 1px solid $gray-light;
+  font-size: 16px;
+  font-weight: 200;
+  padding: 16px;
+  border-radius: 5px;
+  color: $gray;
+  box-sizing: border-box;
+}
+
+input[type=submit], button {
+  border: 2px solid $indigo;
+  background-color: $white;
+  color: $indigo;
+  border-radius: 5px;
+  padding: 16px 30px;
+  font-size: 16px;
+  box-sizing: border-box;
+  cursor: pointer;
+}

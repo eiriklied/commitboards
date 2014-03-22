@@ -6,7 +6,7 @@ Commitboards::Application.routes.draw do
     get 'imagesnap' => 'scripts#imagesnap',                 as: 'imagesnap'
   end
 
-  resources :boards, path: '/', only: :show do
+  resources :boards, path: '/', only: [:show, :create] do
     get :install, on: :member
 
     resources :commits, only: :create

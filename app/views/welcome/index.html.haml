@@ -1,3 +1,12 @@
-%h1 Commitboards
+.front-page.center
+  %h1.mega Commitselfies
 
-%p.ingress A place to show off how nerd you are
+  %p
+    Do you use #{link_to 'git', 'http://git-scm.com'}?
+    %br
+    Let your whole team share selfies everytime someone commits!
+
+  = form_for Board.new do |f|
+    %p.tagline Create a selfie board now and start sharing selfies
+    = f.text_field :name, placeholder: 'Board name'
+    = f.submit 'Go!'

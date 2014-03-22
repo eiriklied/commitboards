@@ -3,4 +3,39 @@
 body {
   background-color: $white;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 200;
+  color: $gray;
+}
+
+h1 {
+  color: $indigo;
+  font-weight: normal;
+  font-weight: 100;
+  font-size: 33px;
+
+  &.mega {
+    font-weight: 100;
+    font-size: 96px;
+    margin-bottom: 50px;
+  }
+}
+
+p {
+  line-height: 1.4em;
+}
+
+a {
+  color: $blue1;
+  text-decoration: none;
+}
+
+.tagline {
+  color: $indigo;
+  font-size: 25px;
+  font-weight: 200;
+}
+
+.center {
+  text-align: center;
 }
