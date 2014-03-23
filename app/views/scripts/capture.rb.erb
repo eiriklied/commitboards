@@ -80,7 +80,7 @@ private
       timestamp = opts.fetch(:timestamp)
       filename = shellescape snapshot_filename(commit_sha)
 
-      upload_response = `curl -s -F commit[project]=#{project_name} -F commit[timestamp]=#{timestamp} -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{filename} #{@commits_url}`
+      upload_response = `curl -s -F commit[sha]=#{commit_sha} -F commit[project]=#{project_name} -F commit[timestamp]=#{timestamp} -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{filename} #{@commits_url}`
 
       if upload_response == 'ok'
         puts "Uploaded #{commit_sha} to #{@commits_url}"

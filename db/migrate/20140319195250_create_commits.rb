@@ -5,6 +5,7 @@ class CreateCommits < ActiveRecord::Migration
       t.datetime :committed_at
       t.string :email
       t.string :name
+      t.string :sha
       t.text :message
       t.attachment :image
       t.references :board

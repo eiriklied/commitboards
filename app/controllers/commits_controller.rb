@@ -14,7 +14,7 @@ private
   end
 
   def commit_params
-    params.require(:commit).permit(:project, :timestamp,
+    params.require(:commit).permit(:sha, :project, :timestamp,
       :email, :name, :message, :image)
   end
 end

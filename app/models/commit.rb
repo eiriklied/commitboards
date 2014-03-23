@@ -1,7 +1,7 @@
 class Commit < ActiveRecord::Base
   belongs_to :board
 
-  validates :name, :email, :project, # add :committed_at when the timestamp setter method works
+  validates :name, :email, :project, :sha, # add :committed_at when the timestamp setter method works
             presence: true
   validates :board_id, presence: true
 

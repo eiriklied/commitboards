@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20140319195250) do
     t.datetime "committed_at"
     t.string   "email"
     t.string   "name"
+    t.string   "sha"
     t.text     "message"
     t.string   "image_file_name"
     t.string   "image_content_type"
