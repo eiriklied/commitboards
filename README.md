@@ -4,6 +4,7 @@
 
 ## small todos
 
+- add automatic updating (check if response sais update. If so, run the install command with curl)
 - get github url/add github link to commit
 - obey $http_proxy / $https_proxy
 - add board key/url to post-commit start/end comments to be able to add more commit board urls to one project?
