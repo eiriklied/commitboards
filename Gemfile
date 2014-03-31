@@ -46,6 +46,8 @@ gem 'puma'
 gem 'rack-timeout'
 gem 'foreman', group: :development
 
+gem 'rails_12factor', group: [:staging, :production] # https://devcenter.heroku.com/articles/rails-integration-gems
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
