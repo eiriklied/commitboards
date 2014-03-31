@@ -79,6 +79,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    pg (0.17.1)
     polyglot (0.3.4)
     puma (2.7.1)
       rack (>= 1.1, < 2.0)
@@ -169,6 +170,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   paperclip
+  pg
   puma
   rack-timeout
   rails (= 4.0.2)
