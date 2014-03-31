@@ -28,6 +28,9 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+gem 'puma'
+gem 'rack-timeout'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -41,9 +44,10 @@ group :development, :test do
   gem 'spring-commands-rspec'
 end
 
-gem 'puma'
-gem 'rack-timeout'
-gem 'foreman', group: :development
+group :development do
+  gem 'foreman'
+  gem 'heroku'
+end
 
 group :staging, :production do
   gem 'rails_12factor' # https://devcenter.heroku.com/articles/rails-integration-gems
