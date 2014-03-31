@@ -40,6 +40,10 @@ group :development, :test do
   gem 'spring-commands-rspec'
 end
 
+gem 'puma'
+gem 'rack-timeout'
+gem 'foreman', group: :development
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
