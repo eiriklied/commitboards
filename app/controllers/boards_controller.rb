@@ -14,7 +14,7 @@ class BoardsController < ApplicationController
   end
 
   def install
-    render 'scripts/project_install.rb.erb'
+    render 'scripts/project_install.rb.erb', layout: false
   end
 
 private

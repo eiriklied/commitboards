@@ -4,7 +4,7 @@
 
 ## small todos
 
-- force https on heroku
+- need text/plain header on boards#install response
 - add automatic updating (check if response sais update. If so, run the install command with curl)
 - get github url/add github link to commit
 - obey $http_proxy / $https_proxy
@@ -12,6 +12,7 @@
 
 ### done
 
+- force https on heroku
 - add commit sha to commit
 - resize images with imagemagic/imagesnap (imagemagick for now)
 - add committer and project name to commit
