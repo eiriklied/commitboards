@@ -4,6 +4,7 @@
 
 ## small todos
 
+- force https on heroku
 - add automatic updating (check if response sais update. If so, run the install command with curl)
 - get github url/add github link to commit
 - obey $http_proxy / $https_proxy
