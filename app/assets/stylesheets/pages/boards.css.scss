@@ -17,15 +17,26 @@ $commit-spacing: 60px;
   }
   .message {
     position: absolute;
-    bottom: 15px;
+    bottom: 5px;
+    padding-top: 3px;
+    padding-bottom: 5px;
     left:0px; right:$commit-spacing;
     color: $white;
     text-align: center;
+
+    background: rgba(0,0,0, 0.2);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
   .author {
     position:absolute;
-    top: $commit-spacing + 5px;
+    top: $commit-spacing;
+    padding-top: 5px;
+    padding-bottom: 3px;
     left:0; right: $commit-spacing;
     color: $white;
+    background: rgba(0,0,0, 0.2);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
   }
 }
