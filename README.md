@@ -4,6 +4,7 @@
 
 ## small todos
 
+- show entire command in install input box so people copy the whole thing
 - declare ruby version in Gemfile
 - need text/plain header on boards#install response
 - add automatic updating (check if response sais update. If so, run the install command with curl)
