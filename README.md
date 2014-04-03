@@ -2,18 +2,35 @@
 
 > A place to show off how nerd you are
 
-## small todos
+## Install locally
 
-- show entire command in install input box so people copy the whole thing
-- declare ruby version in Gemfile
-- need text/plain header on boards#install response
+    # setup database
+    [bundle exec] rake db:migrate
+    # run the one test
+    [bundle exec] rspec
+    # start the server
+    [bundle exec] rails s
+
+
+## Todos
+
+- add some more css animations
 - add automatic updating (check if response sais update. If so, run the install command with curl)
+- write tests for install scripts (guessing full on integration tests is the only way to test this)
+- write tests for posting new commits to a board
+- Add summary for boards:
+  - number of commits
+  - top committers
+  - top projects
+- show entire command in install input box so people copy the whole thing (right now its a bit too narrow)
+- should have `text/plain` header on boards#install response
 - get github url/add github link to commit
 - obey $http_proxy / $https_proxy
 - add board key/url to post-commit start/end comments to be able to add more commit board urls to one project?
 
-### done
+### Done
 
+- declare ruby version in Gemfile
 - force https on heroku
 - add commit sha to commit
 - resize images with imagemagic/imagesnap (imagemagick for now)
