@@ -1,7 +1,12 @@
 class BoardsController < ApplicationController
   before_filter :load_board, except: :create
+  layout false, only: :incoming
 
   def show
+  end
+
+  def incoming
+    @incoming_commits = @board.commits.where('id > ?', params[:last_commit])
   end
 
   def create

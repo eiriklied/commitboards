@@ -7,7 +7,10 @@ Commitboards::Application.routes.draw do
   end
 
   resources :boards, path: '/', only: [:show, :create] do
-    get :install, on: :member
+    member do
+      get :install
+      get :incoming
+    end
 
     resources :commits, only: :create
   end

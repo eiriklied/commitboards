@@ -1,4 +1,4 @@
-%li
+%li{data:{commit_id: commit.id}}
   .image= image_tag commit.image.url
   .author #{commit.name} on #{commit.project} #{time_ago_in_words commit.committed_at} ago
   .message= truncate commit.message

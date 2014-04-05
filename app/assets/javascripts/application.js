@@ -14,5 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require menu
-//= require animate-commits
+//= require poll-for-changes
 //= require select-text

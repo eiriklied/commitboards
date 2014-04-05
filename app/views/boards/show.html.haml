@@ -16,5 +16,6 @@
 
       %p You can install this commitboard to as many git projects as you like.
 
-  %ul.commits
-    = render @board.commits
+  #board{data: {incoming_url: incoming_board_path}}
+    %ul.commits
+      = render @board.commits
