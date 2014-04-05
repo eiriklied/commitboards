@@ -9,7 +9,7 @@ $(window).load ->
 
   updateBoard = (data) ->
     $board.find('ul.commits').prepend data
-    $lastCommit = $board.find('ul.commits li:first').addClass('animated fadeInDown')
+    $lastCommit = $board.find('ul.commits li:first').addClass('animated bounceInDown')
 
 
   pollForChanges = ->
