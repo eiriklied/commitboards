@@ -6,7 +6,8 @@ class BoardsController < ApplicationController
   end
 
   def incoming
-    @incoming_commits = @board.commits.where('id > ?', params[:last_commit])
+    @last_commit = @board.commits.find_by(sha: params[:commit_sha])
+    @incoming_commits = @board.commits.where('committed_at > ?', @last_commit.committed_at)
   end
 
   def create

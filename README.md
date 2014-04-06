@@ -14,6 +14,8 @@
 
 ## Todos
 
+- known bug: sometimes a computer comes back from offline
+  - it uploads many commits
 - write tests for install scripts (guessing full on integration tests is the only way to test this)
 - write tests for posting new commits to a board
 - Add summary for boards:
