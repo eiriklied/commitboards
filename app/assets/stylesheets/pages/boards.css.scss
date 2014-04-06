@@ -10,6 +10,10 @@ $commit-spacing: 60px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     position: relative;
+    a {
+      color: lighten($blue2, 30%);
+      &:hover { text-decoration: underline; }
+    }
   }
   img {
     width: 100%;

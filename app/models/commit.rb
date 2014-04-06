@@ -18,4 +18,12 @@ class Commit < ActiveRecord::Base
   def timestamp=(timestamp)
     self.committed_at = DateTime.strptime(timestamp.to_s,'%s')
   end
+
+  def project
+    github_path.present? ? github_path.split('/').last : super
+  end
+
+  def organization
+    github_path.present? ? github_path.split('/').first : nil
+  end
 end

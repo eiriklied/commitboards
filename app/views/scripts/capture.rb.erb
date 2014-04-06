@@ -43,12 +43,13 @@ private
     name, email = get_name_and_email
     commit_timestamp = get_commit_timestamp_for(commit_sha)
     upload_success = post_request(
-      :commit_sha => commit_sha,
+      :commit_sha   => commit_sha,
       :project_name => @project_name,
-      :name => name,
-      :message => message,
-      :email => email,
-      :timestamp => commit_timestamp
+      :github_path  => get_github_path,
+      :name         => name,
+      :message      => message,
+      :email        => email,
+      :timestamp    => commit_timestamp
     )
 
     clean_uploaded_file(commit_sha) if upload_success
@@ -64,6 +65,12 @@ private
     message = `git log --format=%B -n 1 #{commit_sha}`.strip
   end
 
+  def get_github_path
+    remotes = `git remote -v`.strip
+    return unless remotes =~ /origin\s+(?:git@github\.com:|https:\/\/github\.com\/)(\S+)\.git/
+    $1
+  end
+
   def get_name_and_email
     name  = `git config --get user.name`.strip
     email = `git config --get user.email`.strip
@@ -72,15 +79,16 @@ private
 
   def post_request(opts)
     inside_dir @cb_project_dir do
-      message  = shellescape opts.fetch(:message)
-      email    = shellescape opts.fetch(:email)
-      name     = shellescape opts.fetch(:name)
+      message      = shellescape opts.fetch(:message)
+      email        = shellescape opts.fetch(:email)
+      name         = shellescape opts.fetch(:name)
       project_name = shellescape opts.fetch(:project_name)
-      commit_sha = opts.fetch(:commit_sha)
-      timestamp = opts.fetch(:timestamp)
-      filename = shellescape snapshot_filename(commit_sha)
+      github_path  = shellescape opts.fetch(:github_path)
+      commit_sha   = opts.fetch(:commit_sha)
+      timestamp    = opts.fetch(:timestamp)
+      filename     = shellescape snapshot_filename(commit_sha)
 
-      upload_response = `curl #{http_proxy_settings} -s -F commit[sha]=#{commit_sha} -F commit[project]=#{project_name} -F commit[timestamp]=#{timestamp} -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{filename} #{@commits_url}`
+      upload_response = `curl #{http_proxy_settings} -s -F commit[sha]=#{commit_sha} -F commit[project]=#{project_name} -F commit[github_path]=#{github_path} -F commit[timestamp]=#{timestamp} -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{filename} #{@commits_url}`
 
       if upload_response == 'ok'
         puts "Uploaded #{commit_sha} to #{@commits_url}"

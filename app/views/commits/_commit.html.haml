@@ -1,4 +1,5 @@
 %li{data:{commit_id: commit.id}}
   .image= image_tag commit.image.url
-  .author #{commit.name} on #{commit.project} #{time_ago_in_words commit.committed_at} ago
-  .message= truncate commit.message
+  .author #{commit.name} on #{link_to_project(commit)} #{time_ago_in_words commit.committed_at} ago
+  .message
+    = link_to_commit_with_message commit
