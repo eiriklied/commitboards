@@ -17,7 +17,7 @@ class Installer
     info 'Checking for existence of git project'
     @project_dir = `git rev-parse --show-toplevel 2>&1`.strip
     unless $?.success?
-      error('You need to install git and be inside a git project!')
+      error('You need to be inside a git project!')
     end
   end
 
