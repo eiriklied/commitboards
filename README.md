@@ -22,14 +22,14 @@
   - number of commits
   - top committers
   - top projects
-- show entire command in install input box so people copy the whole thing (right now its a bit too narrow)
 - should have `text/plain` header on boards#install response
 - get github url/add github link to commit
-- obey $http_proxy / $https_proxy
 - add board key/url to post-commit start/end comments to be able to add more commit board urls to one project?
 
 ### Done
 
+- obey system proxy settings for people on vpn
+- show entire command in install input box so people copy the whole thing (right now its a bit too narrow)
 - declare ruby version in Gemfile
 - force https on heroku
 - add commit sha to commit
