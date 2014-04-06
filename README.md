@@ -14,7 +14,6 @@
 
 ## Todos
 
-- add automatic updating (check if response sais update. If so, run the install command with curl)
 - write tests for install scripts (guessing full on integration tests is the only way to test this)
 - write tests for posting new commits to a board
 - Add summary for boards:
@@ -26,6 +25,7 @@
 
 ### Done
 
+- add automatic updating (check if response sais update. If so, run the install command with curl)
 - get github url/add github link to commit
 - add some more css animations with better installation instructions
 - obey system proxy settings for people on vpn
