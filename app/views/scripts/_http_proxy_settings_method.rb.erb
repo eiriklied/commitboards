@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+# find a system proxy is one is set and set curl setting for that proxy
+# fallback to no proxy setting if none is found or something goes wrong
+def http_proxy_settings
+  # this method is slow slo lets cache a bit
+  return @_http_proxy_settings if @_http_proxy_settings
+
+  network_services_str = `networksetup -listallnetworkservices`
+  return '' unless $?.success? # in case command is not available, we fall back to no proxy
+  service_names = network_services_str.split("\n")
+  service_names.delete_at(0) # first line is not a service name
+  service_names.each do |service_name|
+    # check if network service is actually enabled before moving on
+    next unless `networksetup -showpppoestatus #{shellescape(service_name)}`.strip == 'connected'
+    proxy_settings = `networksetup -getwebproxy #{shellescape(service_name)}`
+    next unless $?.success?
+    next unless proxy_settings.include? 'Enabled: Yes'
+    proxy_settings =~ /Server: (.*)\s*Port: (\d*)\s/
+    proxy_server = $1
+    proxy_port = $2
+    return @_http_proxy_settings = "-x #{proxy_server}:#{proxy_port}"
+  end
+  ''
+end

@@ -1,10 +1,14 @@
 Commitboards::Application.routes.draw do
 
   scope :downloads do
-    get 'capture'   => 'scripts#capture_script',            as: 'capture_script'
-    get 'bgcapture' => 'scripts#background_capture_script', as: 'background_capture_script'
-    get 'imagesnap' => 'scripts#imagesnap',                 as: 'imagesnap'
+    get 'capture'   => 'scripts#capture_script',                     as: 'capture_script'
+    get 'bgcapture' => 'scripts#background_capture_script',          as: 'background_capture_script'
+    get 'update_and_capture' => 'scripts#update_and_capture_script', as: 'update_and_capture_script'
+    get 'imagesnap' => 'scripts#imagesnap',                          as: 'imagesnap'
+    get 'version'   => 'scripts#version',                            as: 'version'
   end
+  # need an alias for the version checking, since all the distributed scripts have a board url
+  get ':board_id/version' => 'scripts#version'
 
   resources :boards, path: '/', only: [:show, :create] do
     member do

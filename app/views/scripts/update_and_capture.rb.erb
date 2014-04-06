@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+
+class Updater
+  def initialize
+    @home_dir           = File.expand_path('~')
+    @capture_executable = File.join(@home_dir, '.commitboards', 'bin', 'capture')
+    @log_file           = File.join(@home_dir, '.commitboards', 'capture.log')
+    @version_file       = File.join(@home_dir, '.commitboards', 'bin', 'version')
+    @board_url          = ENV['board_url'] || exit('No board url given')
+    @version_url        = "#{@board_url}/version"
+    @install_url        = "#{@board_url}/install"
+  end
+
+  def run_update_and_capture
+    run_update_if_neccessary
+    run_capture
+  end
+
+  def run_update_if_neccessary
+    puts "Checking with server if there is another version.."
+    server_version = `curl -s --connect-timeout 2 #{http_proxy_settings} #{@version_url}`.strip
+    return unless $?.success? && server_version != local_version
+    puts "There is a new version (#{server_version}). Updating before capturing.."
+    `curl -s #{http_proxy_settings} #{@install_url} | ruby`
+  end
+
+  def run_capture
+    puts "Running capture"
+    cmd = "#{@capture_executable} #{ENV['board_url']} >> #{@log_file} 2>&1"
+    system(cmd)
+  end
+
+  def local_version
+    File.read(@version_file).strip
+  end
+
+  <%= render 'http_proxy_settings_method.rb.erb' %>
+  <%= render 'shellescape_method.rb.erb' %>
+end
+
+Updater.new.run_update_and_capture

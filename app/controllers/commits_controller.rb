@@ -3,6 +3,8 @@ class CommitsController < ApplicationController
   before_filter :load_board
 
   def create
+    logger.info "Incoming commit with script version #{request.headers['X-script-version']}"
+    
     success = @board.commits.create!(commit_params)
     render text: 'ok'
   end

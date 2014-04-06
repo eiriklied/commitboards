@@ -13,8 +13,10 @@ class Capturer
     @imagesnap_executable = File.join(@cb_bin_dir, 'imagesnap')
     @cb_executable        = File.join(@cb_bin_dir, 'capture')
     @cb_projects_dir      = File.join(@cb_dir, 'projects')
+    @version_file         = File.join(@cb_bin_dir, 'version')
     @cb_project_dir       = ensure_dir_present(File.join(@cb_projects_dir, @project_name))
-    @commits_url          = ARGV.first || exit('No commit url given')
+    @board_url            = ARGV.first || exit('No board url given')
+    @commits_url          = "#{@board_url}/commits"
   end
 
   def capture
@@ -27,6 +29,10 @@ class Capturer
   end
 
 private
+
+  def version
+    File.read(@version_file).strip
+  end
 
   def get_last_commit_sha
     `git rev-parse HEAD`.strip
@@ -88,7 +94,7 @@ private
       timestamp    = opts.fetch(:timestamp)
       filename     = shellescape snapshot_filename(commit_sha)
 
-      upload_response = `curl #{http_proxy_settings} -s -F commit[sha]=#{commit_sha} -F commit[project]=#{project_name} -F commit[github_path]=#{github_path} -F commit[timestamp]=#{timestamp} -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{filename} #{@commits_url}`
+      upload_response = `curl #{http_proxy_settings} #{script_version_header} -s -F commit[sha]=#{commit_sha} -F commit[project]=#{project_name} -F commit[github_path]=#{github_path} -F commit[timestamp]=#{timestamp} -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{filename} #{@commits_url}`
 
       if upload_response == 'ok'
         puts "Uploaded #{commit_sha} to #{@commits_url}"
@@ -100,25 +106,8 @@ private
     end
   end
 
-  # find a system proxy is one is set and set curl setting for that proxy
-  # fallback to no proxy setting if none is found or something goes wrong
-  def http_proxy_settings
-    network_services_str = `networksetup -listallnetworkservices`
-    return '' unless $?.success? # in case command is not available, we fall back to no proxy
-    service_names = network_services_str.split("\n")
-    service_names.delete_at(0) # first line is not a service name
-    service_names.each do |service_name|
-      # check if network service is actually enabled before moving on
-      next unless `networksetup -showpppoestatus #{shellescape(service_name)}`.strip == 'connected'
-      proxy_settings = `networksetup -getwebproxy #{shellescape(service_name)}`
-      next unless $?.success?
-      next unless proxy_settings.include? 'Enabled: Yes'
-      proxy_settings =~ /Server: (.*)\s*Port: (\d*)\s/
-      proxy_server = $1
-      proxy_port = $2
-      return "-x #{proxy_server}:#{proxy_port}"
-    end
-    ''
+  def script_version_header
+    "--header 'X-script-version: #{version}'"
   end
 
   def upload_previous_captures
@@ -159,23 +148,8 @@ private
     end
   end
 
-  # from http://svn.ruby-lang.org/repos/ruby/trunk/lib/shellwords.rb
-  def shellescape(str)
-    # An empty argument will be skipped, so return empty quotes.
-    return "''" if str.empty?
-
-    str = str.dup
-
-    # Process as a single byte sequence because not all shell
-    # implementations are multibyte aware.
-    str.gsub!(/([^A-Za-z0-9_\-.,:\/@\n])/n, "\\\\\\1")
-
-    # A LF cannot be escaped with a backslash because a backslash + LF
-    # combo is regarded as line continuation and simply ignored.
-    str.gsub!(/\n/, "'\n'")
-
-    return str
-  end
+  <%= render 'http_proxy_settings_method.rb.erb' %>
+  <%= render 'shellescape_method.rb.erb' %>
 end
 
 Capturer.new.capture

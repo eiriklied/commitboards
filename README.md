@@ -14,7 +14,6 @@
 
 ## Todos
 
-- get github url/add github link to commit
 - add automatic updating (check if response sais update. If so, run the install command with curl)
 - write tests for install scripts (guessing full on integration tests is the only way to test this)
 - write tests for posting new commits to a board
@@ -27,6 +26,7 @@
 
 ### Done
 
+- get github url/add github link to commit
 - add some more css animations with better installation instructions
 - obey system proxy settings for people on vpn
 - show entire command in install input box so people copy the whole thing (right now its a bit too narrow)
