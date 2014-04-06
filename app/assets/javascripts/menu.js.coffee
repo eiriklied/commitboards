@@ -1,3 +1,9 @@
 $(document).on 'click', '.js-install-link', ->
-  $('#installation-instructions').toggleClass 'hidden'
+  $installationInstructions = $('#installation-instructions').toggleClass('hidden animated bounceInDown animate-fast');
+  if $installationInstructions.is(':visible')
+    $('input[data-select-text]').select()
   return false
+
+
+$(window).load ->
+  $('input[data-select-text]').select()

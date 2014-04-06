@@ -1,0 +1,10 @@
+@mixin animate-speed($speed) {
+  -webkit-animation-duration: $speed;
+  -moz-animation-duration: $speed;
+  -webkit-animation-delay: 0;
+  -moz-animation-delay: 0;
+}
+
+.animate-fast{
+  @include animate-speed(.4s);
+}

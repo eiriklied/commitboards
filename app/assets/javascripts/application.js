@@ -15,4 +15,3 @@
 //= require turbolinks
 //= require menu
 //= require poll-for-changes
-//= require select-text
