@@ -14,8 +14,6 @@
 
 ## Todos
 
-- known bug: sometimes a computer comes back from offline
-  - it uploads many commits
 - write tests for install scripts (guessing full on integration tests is the only way to test this)
 - write tests for posting new commits to a board
 - Add summary for boards:
@@ -27,6 +25,10 @@
 
 ### Done
 
+- known bug: sometimes a computer comes back from offline
+  - it uploads many commits, where the oldest commits are uploaded last.
+  - this causes the auto updating js to poll for last with an id
+  - fixed by using id of last commit when polling, looking up the last commit and searching for commits with committed_at after that specific commit
 - add automatic updating (check if response sais update. If so, run the install command with curl)
 - get github url/add github link to commit
 - add some more css animations with better installation instructions
