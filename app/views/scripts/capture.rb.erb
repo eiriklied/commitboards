@@ -89,7 +89,7 @@ private
       email        = shellescape opts.fetch(:email)
       name         = shellescape opts.fetch(:name)
       project_name = shellescape opts.fetch(:project_name)
-      github_path  = shellescape opts.fetch(:github_path)
+      github_path  = shellescape opts.fetch(:github_path) 
       commit_sha   = opts.fetch(:commit_sha)
       timestamp    = opts.fetch(:timestamp)
       filename     = shellescape snapshot_filename(commit_sha)
