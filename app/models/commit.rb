@@ -6,7 +6,7 @@ class Commit < ActiveRecord::Base
   validates :board_id, presence: true
 
   has_attached_file :image,
-                    styles: {medium: ['400x225', :jpg]},
+                    styles: {medium: ['400x225#', :jpg]},
                     default_style: :medium,
                     # couldnt get this to work from paperclip_settings so have to apply to all models with image attachments..
                     # remove all exif information since ipad actually
