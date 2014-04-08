@@ -8,8 +8,9 @@ $(window).load ->
     return $lastCommit.data('commit-sha')
 
   updateBoard = (data) ->
-    $board.find('ul.commits').prepend data
-    $lastCommit = $board.find('ul.commits li:first').addClass('animated bounceInDown animate-fast')
+    $(data).find('img').load ->
+      $board.find('ul.commits').prepend data
+      $lastCommit = $board.find('ul.commits li:first').addClass('animated bounceInDown animate-fast')
 
 
   pollForChanges = ->
