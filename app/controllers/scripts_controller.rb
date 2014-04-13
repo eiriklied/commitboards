@@ -1,4 +1,5 @@
 class ScriptsController < ApplicationController
+  skip_before_filter :require_login
   layout false
 
   def capture_script
