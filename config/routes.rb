@@ -1,5 +1,10 @@
 Commitboards::Application.routes.draw do
 
+  # config/routes.rb
+  post 'oauth/callback'  => 'oauths#callback'
+  get  'oauth/callback'  => 'oauths#callback'
+  get  'oauth/:provider' => 'oauths#oauth', as: :auth_at_provider
+
   scope :downloads do
     get 'capture'   => 'scripts#capture_script',                     as: 'capture_script'
     get 'bgcapture' => 'scripts#background_capture_script',          as: 'background_capture_script'
