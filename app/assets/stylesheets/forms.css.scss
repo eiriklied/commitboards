@@ -15,7 +15,7 @@ input[type=text], textarea {
   }
 }
 
-input[type=submit], button {
+.btn {
   border: 2px solid $indigo;
   background-color: $white;
   color: $indigo;
@@ -23,8 +23,14 @@ input[type=submit], button {
   padding: 16px 30px;
   font-size: 16px;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
   cursor: pointer;
   outline: none;
+
+  &.btn-primary{
+    background-color: $indigo;
+    color: $white;
+  }
 }
 
 input.code-example {

@@ -6,7 +6,11 @@
     Do you have a mac? <br/>
     Let your whole team share selfies everytime someone commits!
 
-  = form_for Board.new do |f|
-    %p.tagline Create a board now and start sharing selfies
-    = f.text_field :name, placeholder: 'Board name', autofocus: true
-    = f.submit 'Go!', id: 'create_board'
+  - if logged_in?
+    = form_for Board.new do |f|
+      %p.tagline Now create a board
+      = f.text_field :name, placeholder: 'Board name', autofocus: true
+      = f.submit 'Go!', id: 'create_board', class: 'btn'
+  - else
+    %p.tagline Create a board in 15 seconds
+    = link_to 'Log in with github', auth_at_provider_path(:github), class: 'btn btn-primary'

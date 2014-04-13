@@ -5,10 +5,14 @@ class OauthsController < ApplicationController
   # sends the user on a trip to the provider,
   # and after authorizing there back to the callback url.
   def oauth
-    login_at(params[:provider])
+    session[:oauth_state] = SecureRandom.hex
+    login_at(params[:provider], state: session[:oauth_state])
   end
 
   def callback
+    # validate state param since sorcery doesnt do it..
+    validate_state_param!
+
     provider = params[:provider]
     begin
       if @user = login_from(provider)
@@ -34,6 +38,14 @@ class OauthsController < ApplicationController
   end
 
   private
+
+  def validate_state_param!
+    if params[:state].blank? || (session[:oauth_state] != params[:state])
+      raise 'Not a valid callback'
+    end
+    session.delete(:oauth_state)
+  end
+
   def fetch_email
     client = Octokit::Client.new(:access_token => @access_token.token)
     # [
