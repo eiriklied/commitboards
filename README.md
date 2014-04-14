@@ -25,6 +25,7 @@
 
 ### Done
 
+- names (and commit messages??) with æøå f*#%s up the script with shellescape problems. Maybe # encoding: utf-8 will solve the problem? Need a terminal with US-ASCII encoding
 - known bug: sometimes a computer comes back from offline
   - it uploads many commits, where the oldest commits are uploaded last.
   - this causes the auto updating js to poll for last with an id

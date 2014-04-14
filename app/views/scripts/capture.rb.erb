@@ -1,5 +1,13 @@
 #!/usr/bin/env ruby
 
+# ruby 1.9 and 2.0 struggles with encoding issues on
+# shells that have US-ASCII encoding and not UTF-8.
+# The following lines is a fix
+if RUBY_VERSION.start_with?('1.9') || RUBY_VERSION.start_with?('2.0')
+  Encoding.default_external = Encoding::UTF_8
+  Encoding.default_internal = Encoding::UTF_8
+end
+
 require 'fileutils'
 
 class Capturer
@@ -89,7 +97,7 @@ private
       email        = shellescape opts.fetch(:email)
       name         = shellescape opts.fetch(:name)
       project_name = shellescape opts.fetch(:project_name)
-      github_path  = shellescape opts.fetch(:github_path) 
+      github_path  = shellescape opts.fetch(:github_path)
       commit_sha   = opts.fetch(:commit_sha)
       timestamp    = opts.fetch(:timestamp)
       filename     = shellescape snapshot_filename(commit_sha)
