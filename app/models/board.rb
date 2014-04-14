@@ -12,6 +12,10 @@ class Board < ActiveRecord::Base
     key
   end
 
+  def user_board_token_for(user)
+    
+  end
+
 private
   def generate_key_unless_present
     self.key = SecureRandom.urlsafe_base64(20) unless key.present?

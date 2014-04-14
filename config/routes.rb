@@ -12,12 +12,13 @@ Commitboards::Application.routes.draw do
     get 'imagesnap' => 'scripts#imagesnap',                          as: 'imagesnap'
     get 'version'   => 'scripts#version',                            as: 'version'
   end
+  get 'install/:token' => 'scripts#install', as: 'install'
+
   # need an alias for the version checking, since all the distributed scripts have a board url
   get ':board_id/version' => 'scripts#version'
 
   resources :boards, path: '/', only: [:show, :create] do
     member do
-      get :install
       get :incoming
     end
 

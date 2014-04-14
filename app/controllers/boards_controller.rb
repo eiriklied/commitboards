@@ -23,10 +23,6 @@ class BoardsController < ApplicationController
     end
   end
 
-  def install
-    render 'scripts/project_install.rb.erb', layout: false
-  end
-
 private
   def load_board
     @board = Board.find_by!(key: params[:id])

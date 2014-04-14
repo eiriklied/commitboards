@@ -22,6 +22,10 @@ class ScriptsController < ApplicationController
     render text: files_hash
   end
 
+  def install
+    render 'project_install.rb.erb'
+  end
+
 private
   def files_hash
     scripts = [

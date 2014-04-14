@@ -7,13 +7,14 @@
       /%li= link_to 'Admin', board_admin_path(@board)
 
 .with-menu.center
+  - if logged_in?
+    %div{id: 'installation-instructions', class: @board.commits.present? ? 'hidden' : ''}
+      .spacing-top.spacing-bottom
+        %p Just paste the command below into your shell to install to your project.
+        %input{id: 'code-example', class: 'code-example', type: 'text', data: {select_text: true},
+          value: "curl #{install_url(UserBoardToken.for(user: current_user, board: @board))} | ruby"}
 
-  %div{id: 'installation-instructions', class: @board.commits.present? ? 'hidden' : ''}
-    .spacing-top.spacing-bottom
-      %p Just paste the command below into your shell to install to your project.
-      %input{id: 'code-example', class: 'code-example', type: 'text', data: {select_text: true}, value: "curl #{install_board_url(@board)} | ruby"}
-
-      %p You can install this commitboard to as many git projects as you like.
+        %p You can install this commitboard to as many git projects as you like.
 
   #board{data: {incoming_url: incoming_board_path}}
     %ul.commits

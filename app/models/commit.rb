@@ -1,9 +1,10 @@
 class Commit < ActiveRecord::Base
   belongs_to :board
+  belongs_to :user
 
-  validates :name, :email, :project, :sha, # add :committed_at when the timestamp setter method works
-            presence: true
-  validates :board_id, presence: true
+  validates :project, :sha, :committed_at,
+             presence: true
+  validates :board_id, :user_id, presence: true
 
   has_attached_file :image,
                     styles: {medium: ['400x225#', :jpg]},
