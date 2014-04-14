@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140413141123) do
+ActiveRecord::Schema.define(version: 20140414204259) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
@@ -26,9 +26,11 @@ ActiveRecord::Schema.define(version: 20140413141123) do
     t.string   "key"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "owner_id"
   end
 
   add_index "boards", ["key"], name: "index_boards_on_key", unique: true
+  add_index "boards", ["owner_id"], name: "index_boards_on_owner_id"
 
   create_table "commits", force: true do |t|
     t.string   "project"

@@ -15,5 +15,6 @@ describe 'create a board' do
     @board = Board.last
 
     expect(current_path).to eq(board_path @board)
+    expect(@board.owner).to eq User.find_by(email: 'jim@test.com')
   end
 end

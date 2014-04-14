@@ -15,7 +15,7 @@ class BoardsController < ApplicationController
   end
 
   def create
-    @board = Board.new(params.require(:board).permit(:name))
+    @board = Board.new(board_params.merge(owner: current_user))
     if @board.save
       redirect_to board_url(@board)
     else
@@ -30,5 +30,9 @@ class BoardsController < ApplicationController
 private
   def load_board
     @board = Board.find_by!(key: params[:id])
+  end
+
+  def board_params
+    params.require(:board).permit(:name)
   end
 end
