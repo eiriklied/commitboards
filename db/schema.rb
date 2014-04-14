@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414204259) do
+ActiveRecord::Schema.define(version: 20140414204922) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(version: 20140414204259) do
     t.datetime "remember_me_token_expires_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"
 
 end
