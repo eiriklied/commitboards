@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
   has_many :authentications, dependent: :destroy
   accepts_nested_attributes_for :authentications
 
+  has_many :user_board_tokens
+  has_many :boards, through: :user_board_tokens
+  has_many :commits
+
   validates :email, presence: true
 
   def email=(str)

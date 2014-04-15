@@ -19,23 +19,35 @@ describe 'commits' do
   end
 
   it 'should not allow commits from unknowns' do
-    visit board_path(@board)
-    token = extract_token_from_page
-    # commit[sha]=#{commit_sha} -F commit[project]=#{project_name} -F commit[github_path]=#{github_path} -F commit[timestamp]=#{timestamp} -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{filename} #{@commits_url}
-    expect {
-      page.driver.post(commits_path(@board),
-        commit: {
-          sha: SecureRandom.hex,
-          project: 'my-project',
-          timestamp: Time.now.to_i,
-          user_board_token: nil
-        }
-      )
-    }.to raise_error ActiveRecord::RecordNotFound
+    page.driver.post(commits_path(@board),
+      commit: {
+        sha: SecureRandom.hex,
+        project: 'my-project',
+        timestamp: Time.now.to_i,
+        user_board_token: nil  # LOOK: no token!!
+      }
+    )
+    expect(page.status_code).to eq 403 # forbidden
   end
 
   it 'should allow commits from an identified user' do
-    pending
+    visit board_path(@board)
+    token_from_page = extract_token_from_page
+
+
+    expect(@board.commits.count).to eql 0
+    page.driver.post(commits_path(@board),
+      commit: {
+        sha: SecureRandom.hex,
+        project: 'my-project',
+        timestamp: Time.now.to_i,
+        user_board_token: token_from_page
+      }
+    )
+
+    expect(page.status_code).to eql 200
+    expect(@board.commits.count).to eql 1
+    expect(@current_user.commits.count).to eql 1
   end
 
   def extract_token_from_page

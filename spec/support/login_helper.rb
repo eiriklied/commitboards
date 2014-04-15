@@ -19,6 +19,7 @@ module LoginHelper
 
     stub_login!(user_data)
     visit auth_at_provider_path(:github)
+    @current_user = User.find_by!(email: user_data[:email])
   end
 
   def override_once(receiver, method_name, &block)
