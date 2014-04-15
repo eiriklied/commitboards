@@ -41,13 +41,22 @@ describe 'commits' do
         sha: SecureRandom.hex,
         project: 'my-project',
         timestamp: Time.now.to_i,
-        user_board_token: token_from_page
+        user_board_token: token_from_page,
+        image: file_upload('spec/support/files/image.jpg')
       }
     )
 
     expect(page.status_code).to eql 200
     expect(@board.commits.count).to eql 1
     expect(@current_user.commits.count).to eql 1
+  end
+
+  # since we are using the driver instead of vanilla capybara,
+  # we borrowed some code from capybara at
+  # https://github.com/jnicklas/capybara/blob/master/lib/capybara/rack_test/form.rb#L44
+  def file_upload(path)
+    content_type = MIME::Types.type_for(path).first.to_s
+    Rack::Test::UploadedFile.new(path, content_type)
   end
 
   def extract_token_from_page

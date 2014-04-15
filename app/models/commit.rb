@@ -14,7 +14,8 @@ class Commit < ActiveRecord::Base
                     # reads exif and rotates images that havethis information
                     convert_options: { all: "-strip" }
 
-  validates_attachment :image, content_type: { content_type: ['image/jpg', 'image/jpeg', 'image/png'] }
+  validates_attachment :image, content_type: { content_type: ['image/jpg', 'image/jpeg', 'image/png'] },
+                               presence: true
 
   def timestamp=(timestamp)
     self.committed_at = DateTime.strptime(timestamp.to_s,'%s')
