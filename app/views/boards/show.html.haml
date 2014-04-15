@@ -8,7 +8,7 @@
 
 .with-menu.center
   - if logged_in?
-    %div{id: 'installation-instructions', class: @board.commits.present? ? 'hidden' : ''}
+    %div{id: 'installation-instructions', class: @commits.present? ? 'hidden' : ''}
       .spacing-top.spacing-bottom
         %p Just paste the command below into your shell to install to your project.
         %input{id: 'code-example', class: 'code-example', type: 'text', data: {select_text: true},
@@ -18,4 +18,4 @@
 
   #board{data: {incoming_url: incoming_board_path}}
     %ul.commits
-      = render @board.commits
+      = render @commits

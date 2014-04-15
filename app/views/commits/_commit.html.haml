@@ -1,5 +1,5 @@
 %li{data:{commit_sha: commit.sha}}
   .image= image_tag commit.image.url
-  .author #{commit.name} on #{link_to_project(commit)} #{time_ago_in_words commit.committed_at} ago
+  .author #{commit.user.name} on #{link_to_project(commit)} #{time_ago_in_words commit.committed_at} ago
   .message
     = link_to_commit_with_message commit

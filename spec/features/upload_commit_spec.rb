@@ -34,8 +34,8 @@ describe 'commits' do
     visit board_path(@board)
     token_from_page = extract_token_from_page
 
+    expect(all('ul.commits li').count).to eql 0
 
-    expect(@board.commits.count).to eql 0
     page.driver.post(board_commits_path(@board),
       commit: {
         sha: SecureRandom.hex,
@@ -47,8 +47,9 @@ describe 'commits' do
     )
 
     expect(page.status_code).to eql 200
-    expect(@board.commits.count).to eql 1
-    expect(@current_user.commits.count).to eql 1
+
+    visit board_path(@board)
+    expect(all('ul.commits li').count).to eql 1
   end
 
   # since we are using the driver instead of vanilla capybara,

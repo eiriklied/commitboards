@@ -3,6 +3,8 @@ class BoardsController < ApplicationController
   layout false, only: :incoming
 
   def show
+    # eager load users for fast page load
+    @commits = @board.commits.includes(:user)
   end
 
   def incoming

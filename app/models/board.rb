@@ -13,7 +13,7 @@ class Board < ActiveRecord::Base
   end
 
   def user_board_token_for(user)
-    
+
   end
 
 private
