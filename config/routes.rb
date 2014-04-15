@@ -21,9 +21,8 @@ Commitboards::Application.routes.draw do
     member do
       get :incoming
     end
-
-    resources :commits, only: :create
   end
+  resources :commits, only: :create
 
   root 'welcome#index'
 
