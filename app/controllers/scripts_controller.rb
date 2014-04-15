@@ -23,7 +23,9 @@ class ScriptsController < ApplicationController
   end
 
   def install
-    render 'project_install.rb.erb'
+    @user_board = UserBoardToken.find_by key: params[:token]
+    @board = @user_board.board
+    render 'project_install.rb.erb', content_type: :text_plain
   end
 
 private

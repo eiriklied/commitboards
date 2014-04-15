@@ -7,8 +7,9 @@ class Updater
     @log_file           = File.join(@home_dir, '.commitboards', 'capture.log')
     @version_file       = File.join(@home_dir, '.commitboards', 'bin', 'version')
     @board_url          = ENV['board_url'] || exit('No board url given')
+    @token              = ENV['token']     || exit('No token given')
     @version_url        = "#{@board_url}/version"
-    @install_url        = "#{@board_url}/install"
+    @install_url        = "#{@board_url}/install/#{@token}"
   end
 
   def run_update_and_capture
@@ -26,7 +27,7 @@ class Updater
 
   def run_capture
     puts "Running capture"
-    cmd = "#{@capture_executable} #{ENV['board_url']} >> #{@log_file} 2>&1"
+    cmd = "token=#{@token} board_url=#{@board_url} #{@capture_executable} >> #{@log_file} 2>&1"
     system(cmd)
   end
 

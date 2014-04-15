@@ -19,7 +19,7 @@ describe 'commits' do
   end
 
   it 'should not allow commits from unknowns' do
-    page.driver.post(commits_path(@board),
+    page.driver.post(board_commits_path(@board),
       commit: {
         sha: SecureRandom.hex,
         project: 'my-project',
@@ -36,7 +36,7 @@ describe 'commits' do
 
 
     expect(@board.commits.count).to eql 0
-    page.driver.post(commits_path(@board),
+    page.driver.post(board_commits_path(@board),
       commit: {
         sha: SecureRandom.hex,
         project: 'my-project',

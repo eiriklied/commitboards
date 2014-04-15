@@ -10,7 +10,7 @@ class BackgroundCapturer
 
   def run_capture
     info "Capturing and posting to #{ENV['board_url']}"
-    system "board_url=#{ENV['board_url']} nohup #{@update_script} >> #{@log_file} 2>&1 &"
+    system "board_url=#{ENV['board_url']} token=#{ENV['token']} nohup #{@update_script} >> #{@log_file} 2>&1 &"
   end
 
 private

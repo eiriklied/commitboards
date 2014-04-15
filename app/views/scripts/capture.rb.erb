@@ -15,7 +15,8 @@ class Capturer
     @cb_projects_dir      = File.join(@cb_dir, 'projects')
     @version_file         = File.join(@cb_bin_dir, 'version')
     @cb_project_dir       = ensure_dir_present(File.join(@cb_projects_dir, @project_name))
-    @board_url            = ARGV.first || exit('No board url given')
+    @board_url            = ENV['board_url'] || exit('No board url given')
+    @token                = ENV['token']     || exit('No token given')
     @commits_url          = "#{@board_url}/commits"
   end
 
@@ -46,16 +47,14 @@ private
 
   def upload(commit_sha)
     message = get_commit_message_for(commit_sha)
-    name, email = get_name_and_email
     commit_timestamp = get_commit_timestamp_for(commit_sha)
     upload_success = post_request(
       :commit_sha   => commit_sha,
       :project_name => @project_name,
       :github_path  => get_github_path,
-      :name         => name,
       :message      => message,
-      :email        => email,
-      :timestamp    => commit_timestamp
+      :timestamp    => commit_timestamp,
+      :user_board_token => @token
     )
 
     clean_uploaded_file(commit_sha) if upload_success
@@ -77,24 +76,17 @@ private
     $1
   end
 
-  def get_name_and_email
-    name  = `git config --get user.name`.strip
-    email = `git config --get user.email`.strip
-    [name, email]
-  end
-
   def post_request(opts)
     inside_dir @cb_project_dir do
-      message      = shellescape opts.fetch(:message)
-      email        = shellescape opts.fetch(:email)
-      name         = shellescape opts.fetch(:name)
-      project_name = shellescape opts.fetch(:project_name)
-      github_path  = shellescape opts.fetch(:github_path) 
-      commit_sha   = opts.fetch(:commit_sha)
-      timestamp    = opts.fetch(:timestamp)
-      filename     = shellescape snapshot_filename(commit_sha)
+      message          = shellescape opts.fetch(:message)
+      project_name     = shellescape opts.fetch(:project_name)
+      github_path      = shellescape opts.fetch(:github_path)
+      commit_sha       = opts.fetch(:commit_sha)
+      timestamp        = opts.fetch(:timestamp)
+      user_board_token = shellescape opts.fetch(:user_board_token)
+      filename         = shellescape snapshot_filename(commit_sha)
 
-      upload_response = `curl #{http_proxy_settings} #{script_version_header} -s -F commit[sha]=#{commit_sha} -F commit[project]=#{project_name} -F commit[github_path]=#{github_path} -F commit[timestamp]=#{timestamp} -F commit[email]=#{email} -F commit[name]=#{name} -F commit[message]=#{message} -F commit[image]=@#{filename} #{@commits_url}`
+      upload_response = `curl #{http_proxy_settings} #{script_version_header} -s -F commit[user_board_token]=#{user_board_token} -F commit[sha]=#{commit_sha} -F commit[project]=#{project_name} -F commit[github_path]=#{github_path} -F commit[timestamp]=#{timestamp} -F commit[message]=#{message} -F commit[image]=@#{filename} #{@commits_url}`
 
       if upload_response == 'ok'
         puts "Uploaded #{commit_sha} to #{@commits_url}"

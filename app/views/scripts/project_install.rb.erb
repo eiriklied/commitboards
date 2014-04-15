@@ -24,6 +24,7 @@ class Installer
   end
 
   def create_commitboards_directories
+    info "Installing commitboards to #{@project_dir}"
     @home_dir             = ensure_dir_present File.expand_path('~')
     @cb_dir               = ensure_dir_present File.join(@home_dir, '.commitboards')
     @cb_bin_dir           = ensure_dir_present File.join(@cb_dir, 'bin')
@@ -63,20 +64,27 @@ class Installer
   end
 
   def install_post_commit_hook_to_project
-    info 'Installing post-commit hook!'
-
     content = post_commit_content_with_comments
 
-    if cb_hook?
-      warn "Already found a commit hook in '#{@post_commit_file}'."
-      warn "If you want to add the post-commit command yourself, here it is: #{post_commit_command}"
-      return
-    end
+    # Temporary disabling being nice as we want to override the commit hook completely while
+    # moving to new key based commit uploads
+    #
+    # if cb_hook?
+    #   warn "Already found a commit hook in '#{@post_commit_file}'."
+    #   warn "If you want to add the post-commit command yourself, here it is: #{post_commit_command}"
+    #   return
+    # end
+    #
+    # File.open(@post_commit_file, 'a') do |f|
+    #   f.write(content)
+    #   f.chmod 0755
+    # end
 
-    File.open(@post_commit_file, 'a') do |f|
+    File.open(@post_commit_file, 'w') do |f|
       f.write(content)
       f.chmod 0755
     end
+
   end
 
   def show_success_message
@@ -95,7 +103,7 @@ EOS
   end
 
   def post_commit_command
-    "board_url=<%= board_url(@board) %> #{@cb_bg_executable}"
+    "board_url=<%= board_url(@board) %> token=<%= @user_board.key %> #{@cb_bg_executable}"
   end
 
   def cb_hook?

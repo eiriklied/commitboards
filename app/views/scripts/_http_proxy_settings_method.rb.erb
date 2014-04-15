@@ -2,7 +2,7 @@
 # find a system proxy is one is set and set curl setting for that proxy
 # fallback to no proxy setting if none is found or something goes wrong
 def http_proxy_settings
-  # this method is slow slo lets cache a bit
+  # this method is slow so lets cache a bit
   return @_http_proxy_settings if @_http_proxy_settings
 
   network_services_str = `networksetup -listallnetworkservices`
