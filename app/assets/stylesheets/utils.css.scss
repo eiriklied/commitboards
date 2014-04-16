@@ -4,3 +4,21 @@
 
 .spacing-top    { margin-top:    100px; }
 .spacing-bottom { margin-bottom: 100px; }
+
+.alert, .notice {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  border:1px solid;
+  max-width: 80%;
+  padding: 20px;
+  margin: 20px auto;
+  text-align:center;
+  a {
+    text-decoration: underline;
+  }
+}
+
+.alert{
+  background-color: $yellow-light;
+  border-color: $yellow;
+}

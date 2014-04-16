@@ -1,4 +1,9 @@
 .front-page.center
+  - if flash[:alert]
+    .alert= flash[:alert]
+  - if flash[:notice]
+    .notice= flash[:notice]
+
   %h1.mega Commitboards
 
   %p

@@ -10,7 +10,7 @@ module LoginHelper
     override_once(OauthsController, :callback) do |provider|
       user = User.find_or_create_by! user_data
       auto_login(user)
-      redirect_to root_path
+      redirect_to dashboard_path
     end
   end
 

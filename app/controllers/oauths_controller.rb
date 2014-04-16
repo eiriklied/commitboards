@@ -16,7 +16,7 @@ class OauthsController < ApplicationController
     provider = params[:provider]
     begin
       if @user = login_from(provider)
-        redirect_to root_url
+        redirect_to dashboard_url
       else
         # sorcery creates the user without running validations
         # but we need to set an email which github doesnt return
@@ -27,7 +27,7 @@ class OauthsController < ApplicationController
         # protect from session fixation attack
         reset_session
         auto_login(@user, true)
-        redirect_to root_path, notice: 'Logged in!'
+        redirect_to dashboard_path, notice: 'Logged in!'
       end
     rescue Exception => e
       logger.error e.message

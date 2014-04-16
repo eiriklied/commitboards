@@ -5,6 +5,10 @@ Commitboards::Application.routes.draw do
   get  'oauth/callback'  => 'oauths#callback'
   get  'oauth/:provider' => 'oauths#oauth', as: :auth_at_provider
 
+  get 'dashboard' => 'dashboards#show', as: :dashboard
+
+
+
   scope :downloads do
     get 'capture'   => 'scripts#capture_script',                     as: 'capture_script'
     get 'bgcapture' => 'scripts#background_capture_script',          as: 'background_capture_script'
