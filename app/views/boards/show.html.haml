@@ -4,7 +4,10 @@
     %h1= @board.name
     %ul.menu-items
       %li= link_to 'Install', '#', class: 'js-install-link'
-      /%li= link_to 'Admin', board_admin_path(@board)
+      - if logged_in?
+        %li= link_to current_user.name, dashboard_path
+      - else
+        %li= link_to 'Log in', auth_at_provider_path(:github)
 
 .with-menu.center
   - if logged_in?

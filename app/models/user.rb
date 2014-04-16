@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
 
   validates :email, presence: true
 
+  def board_commits(board)
+    self.commits.where(board: board)
+  end
+
   def email=(str)
     super(str.downcase) if str.present?
   end

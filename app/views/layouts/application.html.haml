@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %title #{yield :title}Commitboards
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  %body
+    = yield :menu
+
+    - if content_for? :menu
+      .with-menu
+
+    .animated.fadeInDown
+      - if flash[:alert]
+        .alert= flash[:alert]
+      - if flash[:notice]
+        .notice= flash[:notice]
+      = yield

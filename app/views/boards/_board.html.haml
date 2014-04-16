@@ -1,0 +1,4 @@
+%li
+  .board-name
+    #{link_to board.name, board_path(board)} with #{board.commits.count} selfies,
+    #{current_user.board_commits(board).count} of you

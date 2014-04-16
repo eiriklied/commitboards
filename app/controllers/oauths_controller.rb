@@ -16,7 +16,7 @@ class OauthsController < ApplicationController
     provider = params[:provider]
     begin
       if @user = login_from(provider)
-        redirect_to dashboard_url
+        redirect_to dashboard_url, notice: 'Logged in!'
       else
         # sorcery creates the user without running validations
         # but we need to set an email which github doesnt return
@@ -33,7 +33,7 @@ class OauthsController < ApplicationController
       logger.error e.message
       e.backtrace.each_with_index{ |line, i| logger.error line if i < 15}
 
-      redirect_to root_path, alert: "Could not log you in #{provider.titleize}!"
+      redirect_to root_path, alert: 'Could not log you in! Did you allow us to get your email from github?'
     end
   end
 
