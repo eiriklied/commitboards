@@ -7,3 +7,6 @@ $(document).on 'click', '.js-install-link', ->
 
 $(window).load ->
   $('input[data-select-text]').select()
+
+$(document).on 'click', 'input[data-select-text]', ->
+  $(this).select()
