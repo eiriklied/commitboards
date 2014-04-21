@@ -1,10 +1,12 @@
 .front-page.center
   %h1.mega Commitboards
 
-  %p
-    Do you use #{link_to 'git', 'http://git-scm.com'}? <br/>
-    Do you have a mac? <br/>
-    Let your whole team share selfies everytime someone commits!
+  .spacing-top
+    %p
+      Do you use #{link_to 'git', 'http://git-scm.com'}? <br/>
+      Do you have a mac? <br/>
+      Let your whole team share selfies everytime someone commits!
 
+  .spacing-top
     %p.tagline Create a board in 15 seconds
     = link_to 'Log in with github', new_session_path, class: 'btn btn-primary'

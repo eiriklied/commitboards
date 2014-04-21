@@ -1,0 +1,20 @@
+ul.boards {
+  margin-left: 0;
+  padding-left: 0;
+  li {
+    max-width: 500px;
+    margin: 10px auto;
+  }
+  a {
+    display: block;
+    padding: 20px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    background-color: $indigo-light;
+    color: $white;
+    &:hover {
+      background-color: $indigo;
+      color: $white;
+    }
+  }
+}

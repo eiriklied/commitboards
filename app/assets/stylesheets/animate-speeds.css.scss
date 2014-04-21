@@ -8,3 +8,6 @@
 .animate-fast{
   @include animate-speed(.4s);
 }
+.animate-medium {
+  @include animate-speed(.7s);
+}

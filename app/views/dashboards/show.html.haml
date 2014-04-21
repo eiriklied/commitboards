@@ -6,16 +6,15 @@
     %ul.menu-items
       %li= link_to 'Log out', session_path, method: :delete, id: 'log-out'
 
-.spacing-top.gutter
+.center
   - if current_user.boards.present?
-    %h1 Your boards
-    %ul.boards
-      = render current_user.boards
-  - else
-    %h1 You have no boards yet!
+    .spacing-top
+      %h1 Your boards
+      %ul.boards
+        = render current_user.boards
 
-.spacing-top.gutter
-  = form_for Board.new do |f|
-    %h1 Create a new board
-    = f.text_field :name, placeholder: 'Board name', autofocus: true
-    = f.submit 'Go!', id: 'create_board', class: 'btn'
+  .spacing-top
+    = form_for Board.new do |f|
+      %h1= current_user.boards.present? ? 'Or create a new board' : 'Now create a board!'
+      = f.text_field :name, placeholder: 'Board name', autofocus: true
+      = f.submit 'Go!', id: 'create_board', class: 'btn'
