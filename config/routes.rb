@@ -5,7 +5,7 @@ Commitboards::Application.routes.draw do
   get  'oauth/:provider' => 'oauths#oauth', as: :auth_at_provider
   resource :session , only: [:new, :destroy]
 
-  get 'dashboard' => 'dashboards#show', as: :dashboard
+  resource :dashboard, only: :show
 
 
 
