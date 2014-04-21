@@ -9,7 +9,7 @@
       - else
         %li= link_to 'Log in', new_session_path
 
-.with-menu.center
+.center
   - if logged_in?
     %div{id: 'installation-instructions', class: @commits.present? ? 'hidden' : ''}
       .spacing-top.spacing-bottom
