@@ -118,7 +118,7 @@ Rails.application.config.sorcery.configure do |config|
   config.github.key = ENV['GITHUB_CLIENT_ID']
   config.github.secret = ENV['GITHUB_CLIENT_SECRET']
   config.github.callback_url = Settings.github.callback_url
-  config.github.user_info_mapping = {name: 'name'} # have to fetch email in separate api call
+  config.github.user_info_mapping = {name: 'name', github_url: 'html_url', avatar_url: 'avatar_url'} # have to fetch email in separate api call
   config.github.scope = ['user:email']
 
   #

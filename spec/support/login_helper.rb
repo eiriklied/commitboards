@@ -15,7 +15,12 @@ module LoginHelper
   end
 
   def login_as(user_data = {})
-    user_data = {email: 'john@doe.com', name: 'John Doe'}.merge(user_data)
+    user_data = {
+      email: 'john@doe.com',
+      name: 'John Doe',
+      github_url: 'https://github.com/johndoe',
+      avatar_url: 'https://avatars.githubusercontent.com/u/12345?'
+    }.merge(user_data)
 
     stub_login!(user_data)
     visit new_session_path

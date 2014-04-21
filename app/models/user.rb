@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :boards, through: :user_board_tokens
   has_many :commits
 
-  validates :email, presence: true
+  validates :email, :name, :github_url, :avatar_url, presence: true
 
   def board_commits(board)
     self.commits.where(board: board)
