@@ -13,7 +13,7 @@
 
     .animated.fadeInDown
       - if flash[:alert]
-        .alert= flash[:alert]
+        #js-global-message.alert= flash[:alert]
       - if flash[:notice]
-        .notice= flash[:notice]
+        #js-global-message.notice= flash[:notice]
       = yield

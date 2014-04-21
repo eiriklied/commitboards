@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require hide-alerts-and-notices
 //= require menu
 //= require poll-for-changes
