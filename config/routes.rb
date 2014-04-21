@@ -1,9 +1,9 @@
 Commitboards::Application.routes.draw do
 
-  # config/routes.rb
   post 'oauth/callback'  => 'oauths#callback'
   get  'oauth/callback'  => 'oauths#callback'
   get  'oauth/:provider' => 'oauths#oauth', as: :auth_at_provider
+  resource :session , only: [:new, :destroy]
 
   get 'dashboard' => 'dashboards#show', as: :dashboard
 

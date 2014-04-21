@@ -7,7 +7,7 @@
       - if logged_in?
         %li= link_to current_user.name, dashboard_path
       - else
-        %li= link_to 'Log in', auth_at_provider_path(:github)
+        %li= link_to 'Log in', new_session_path
 
 .with-menu.center
   - if logged_in?

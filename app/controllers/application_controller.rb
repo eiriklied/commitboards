@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   end
 
   def not_authenticated
-    redirect_to root_url, alert: "Your need to #{view_context.link_to 'log in', auth_at_provider_path(:github)}".html_safe
+    redirect_to root_url, alert: "Your need to #{view_context.link_to 'log in', new_session_path}".html_safe
   end
 end

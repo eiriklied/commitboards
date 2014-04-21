@@ -18,7 +18,7 @@ module LoginHelper
     user_data = {email: 'john@doe.com', name: 'John Doe'}.merge(user_data)
 
     stub_login!(user_data)
-    visit auth_at_provider_path(:github)
+    visit new_session_path
     @current_user = User.find_by!(email: user_data[:email])
   end
 

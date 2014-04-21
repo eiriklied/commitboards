@@ -3,8 +3,8 @@
 
   .menu
     %h1= current_user.name
-    -# %ul.menu-items
-    -#   %li
+    %ul.menu-items
+      %li= link_to 'Log out', session_path, method: :delete, id: 'log-out'
 
 .spacing-top.gutter
   - if current_user.boards.present?
