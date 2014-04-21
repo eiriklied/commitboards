@@ -1,13 +1,10 @@
-@import "colorscheme";
-
-$menu-height: 70px;
 
 .menu {
   position: absolute;
   z-index: 1;
   left:0; top:0; right:0;
   height: $menu-height;
-  padding:12px 30px;
+  padding:12px $gutter-width;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   background-color: $indigo;

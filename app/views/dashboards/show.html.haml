@@ -6,19 +6,16 @@
     -# %ul.menu-items
     -#   %li
 
-
-
-.spacing-top
-  = form_for Board.new do |f|
-    %h1 Create a new board
-    = f.text_field :name, placeholder: 'Board name', autofocus: true
-    = f.submit 'Go!', id: 'create_board', class: 'btn'
-
-
-.spacing-top
+.spacing-top.gutter
   - if current_user.boards.present?
     %h1 Your boards
     %ul.boards
       = render current_user.boards
   - else
     %h1 You have no boards yet!
+
+.spacing-top.gutter
+  = form_for Board.new do |f|
+    %h1 Create a new board
+    = f.text_field :name, placeholder: 'Board name', autofocus: true
+    = f.submit 'Go!', id: 'create_board', class: 'btn'
