@@ -3,11 +3,11 @@
   .menu
     %h1= @board.name
     %ul.menu-items
-      %li= link_to 'Install', '#', class: 'js-install-link'
       - if logged_in?
+        %li= link_to 'Install', '#', class: 'js-install-link'
         %li= link_to current_user.name, dashboard_path
       - else
-        %li= link_to 'Log in', new_session_path
+        %li= link_to 'Log in to install', new_session_from_board_path(@board)
 
 .center
   - if logged_in?

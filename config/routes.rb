@@ -4,6 +4,7 @@ Commitboards::Application.routes.draw do
   get  'oauth/callback'  => 'oauths#callback'
   get  'oauth/:provider' => 'oauths#oauth', as: :auth_at_provider
   resource :session , only: [:new, :destroy]
+  get 'session/new/:board_id' => 'sessions#new', as: :new_session_from_board
 
   resource :dashboard, only: :show
 
