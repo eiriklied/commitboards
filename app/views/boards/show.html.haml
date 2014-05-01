@@ -22,3 +22,8 @@
   #board{data: {incoming_url: incoming_board_path}}
     %ul.commits
       = render @commits
+
+= content_for :bottom do
+  .card-overlay.js-card-overlay.hidden
+    .card.js-card
+      Hello

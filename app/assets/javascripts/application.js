@@ -16,3 +16,4 @@
 //= require hide-alerts-and-notices
 //= require menu
 //= require poll-for-changes
+//= require card

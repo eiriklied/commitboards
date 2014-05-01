@@ -1,7 +1,8 @@
 class CommitsController < ApplicationController
   protect_from_forgery with: :null_session # since its an api
 
-  before_filter :load_user_board
+  before_filter :load_user_board_from_token, only: :create
+  before_filter :load_board, except: :create
 
   def create
     logger.info "Incoming commit with script version #{request.headers['X-script-version']}"
@@ -13,9 +14,18 @@ class CommitsController < ApplicationController
     render text: 'ok'
   end
 
+  def show
+    @commit = @board.commits.find_by(sha: params[:id])
+    render 'show.js.erb'
+  end
+
 
 private
-  def load_user_board
+  def load_board
+    @board = Board.find_by key: params[:board_id]
+  end
+
+  def load_user_board_from_token
     @user_board = UserBoardToken.find_by key: params[:commit][:user_board_token]
     if @user_board.blank?
       render nothing: true, status: :forbidden

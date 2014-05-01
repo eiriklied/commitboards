@@ -17,6 +17,10 @@ class Commit < ActiveRecord::Base
   validates_attachment :image, content_type: { content_type: ['image/jpg', 'image/jpeg', 'image/png'] },
                                presence: true
 
+  def to_param
+    sha
+  end
+
   def timestamp=(timestamp)
     self.committed_at = DateTime.strptime(timestamp.to_s,'%s')
   end

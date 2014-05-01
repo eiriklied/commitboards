@@ -1,0 +1,26 @@
+.card-overlay {
+  position: fixed;
+  z-index: 100;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 255, 255, 0.6);
+  overflow-y: auto;
+}
+.card {
+  width: 600px;
+  background-color: $white;
+  min-height: 600px;
+  margin: 50px auto;
+  z-index:101;
+  display:block;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  padding: $gutter-width;
+  border: 2px solid $indigo-light;
+}
+
+.card-image {
+  width: 100%;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  margin-bottom: $gutter-width;
+}

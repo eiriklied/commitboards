@@ -29,7 +29,7 @@ Commitboards::Application.routes.draw do
     member do
       get :incoming
     end
-    resources :commits, only: :create
+    resources :commits, only: [:create, :show]
   end
 
   root 'welcome#index'
