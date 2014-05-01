@@ -31,4 +31,5 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include LoginHelper
+  config.include CommitHelper
 end

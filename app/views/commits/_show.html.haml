@@ -1,1 +1,4 @@
 = image_tag @commit.image.url, class: 'card-image'
+
+= form_for Comment.new, remote: true do |f|
+  = f.text_area :comment
