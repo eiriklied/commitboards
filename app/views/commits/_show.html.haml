@@ -3,7 +3,7 @@
 = form_for Comment.new, remote: true, url: board_commit_comments_path(@board, @commit) do |f|
   .new-comment
     = avatar_for current_user
-    = f.text_area :body
+    = f.text_area :body, class: 'input-small'
     = f.submit 'Comment!', id: 'add-comment', class: 'btn btn-primary btn-small'
 
 %ul.comments

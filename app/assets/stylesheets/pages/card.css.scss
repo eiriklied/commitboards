@@ -28,7 +28,7 @@
 .card {
   .new-comment {
     position: relative;
-    margin-left:50px;
+    margin-left:40px + $body-text-size;
     .avatar {
       position: absolute;
       top: 0;
@@ -36,6 +36,7 @@
     }
     textarea {
       width: 100%;
+      margin-bottom: $body-text-size - 8px;
     }
   }
 }
@@ -47,28 +48,26 @@ ul.comments {
 }
 li.comment {
   position: relative;
-  margin-left:50px;
+  margin-left: 40px + $body-text-size;
   margin-top: $gutter-width;
   border-radius: 5px;
   -moz-border-radius: 5px;
-
-  border: 1px solid $indigo;
-
+  border: 1px solid $indigo-lighter;
   font-size: $body-text-size;
 
   .avatar {
     position: absolute;
     top: 0;
-    left: -50px;
+    left: -(40px + $body-text-size);
   }
 
   .comment-meta {
     background-color: $indigo-lighter;
     padding: $body-text-size;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    -moz-border-top-left-radius: 5px;
-    -moz-border-top-right-radius: 5px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    -moz-border-top-left-radius: 4px;
+    -moz-border-top-right-radius: 4px;
   }
   .comment-body {
     padding: 0 $body-text-size;

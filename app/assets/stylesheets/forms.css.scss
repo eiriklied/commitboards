@@ -12,6 +12,11 @@ input[type=text], textarea {
   &:focus {
     border-color: $indigo-light;
   }
+  &.input-small {
+    padding: $body-text-size;
+    font-size: $body-text-size;
+    font-weight: normal;
+  }
 }
 
 .btn {
