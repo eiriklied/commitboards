@@ -26,8 +26,8 @@ describe 'Card' do
     expect(@commit.reload.comments_count).to eql 1 # counter_cache
   end
 
-  it 'should be possible to like a commit' do
-    pending
-  end
+  it 'should be possible to edit your own commit comment'
+  it 'should be possible to delete your own commit comment'
+  it 'should be possible to like a commit'
 
 end
