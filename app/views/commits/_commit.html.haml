@@ -12,7 +12,7 @@
     .row
       .meta
         = link_to board_commit_path(@board, commit), data: {open_card: true} do
-          = commit.comments_count
+          %span.comments-count= commit.comments_count
           %span.glyphicon.glyphicon-comment
 
       .message
