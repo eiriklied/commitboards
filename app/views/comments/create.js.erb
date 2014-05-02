@@ -1,4 +1,6 @@
 <% if @comment.persisted? %>
   $('.js-card').html('<%= j render('commits/show') %>');
+  $('.js-card').trigger('card:initialize'); // trigger initialization
+  
   $('li[data-commit-sha=<%= @commit.sha %>]').find('.comments-count').text('<%= @commit.comments.count %>');
 <% end %>

@@ -22,12 +22,12 @@
   width: 100%;
   border-radius: 5px;
   -moz-border-radius: 5px;
-  margin-bottom: $gutter-width;
 }
 
 .card {
   .new-comment {
     position: relative;
+    margin-top: $gutter-width;
     margin-left:40px + $body-text-size;
     .avatar {
       position: absolute;
