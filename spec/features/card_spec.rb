@@ -10,9 +10,16 @@ describe 'Card' do
   end
 
   it 'should be possible to open a card for a commit' do
-
-    link_to_commit = find('ul.commits .image a')[:href]
-
-    expect(link_to_commit).to eql board_commit_path(@board, @commit)
+    find('ul.commits .image a').click
+    expect(current_path).to eql board_commit_path(@board, @commit)
   end
+
+  it 'should be possible to comment on a commit' do
+
+  end
+
+  it 'should be possible to like a commit' do
+    pending
+  end
+
 end

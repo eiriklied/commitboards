@@ -16,7 +16,7 @@ class CommitsController < ApplicationController
 
   def show
     @commit = @board.commits.find_by(sha: params[:id])
-    render 'show.js.erb'
+    render 'show.html.haml', layout: false
   end
 
 
