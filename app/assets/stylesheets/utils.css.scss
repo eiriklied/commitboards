@@ -6,6 +6,8 @@
 .spacing-bottom { margin-bottom: 100px; }
 .gutter         { margin-left:   $gutter-width; margin-right: $gutter-width; }
 
+.pull-right { float: right; }
+
 
 .alert, .notice {
   border-radius: 5px;
@@ -28,4 +30,9 @@
   background-color: $green;
   border-color: $green;
   color: $white;
+}
+
+.avatar {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
 }

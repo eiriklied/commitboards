@@ -2,7 +2,7 @@
   position: fixed;
   z-index: 100;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   overflow-y: auto;
 }
 .card {
@@ -15,7 +15,7 @@
   border-radius: 5px;
   -moz-border-radius: 5px;
   padding: $gutter-width;
-  border: 2px solid $indigo-light;
+  background-color: $indigo-lightest;
 }
 
 .card-image {
@@ -23,4 +23,54 @@
   border-radius: 5px;
   -moz-border-radius: 5px;
   margin-bottom: $gutter-width;
+}
+
+.card {
+  .new-comment {
+    position: relative;
+    margin-left:50px;
+    .avatar {
+      position: absolute;
+      top: 0;
+      left: -50px;
+    }
+    textarea {
+      width: 100%;
+    }
+  }
+}
+
+ul.comments {
+  list-style-type: none;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+li.comment {
+  position: relative;
+  margin-left:50px;
+  margin-top: $gutter-width;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+
+  border: 1px solid $indigo;
+
+  font-size: $body-text-size;
+
+  .avatar {
+    position: absolute;
+    top: 0;
+    left: -50px;
+  }
+
+  .comment-meta {
+    background-color: $indigo-lighter;
+    padding: $body-text-size;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    -moz-border-top-left-radius: 5px;
+    -moz-border-top-right-radius: 5px;
+  }
+  .comment-body {
+    padding: 0 $body-text-size;
+  }
 }

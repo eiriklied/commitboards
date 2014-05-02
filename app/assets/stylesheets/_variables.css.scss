@@ -4,7 +4,9 @@ $turquoise:  #49b1be;
 $blue1:      #4b90c0;
 $blue2:      #4e70c3;
 $indigo:     #5250c5;
-$indigo-light: lighten($indigo, 10);
+$indigo-light:   lighten($indigo, 10);
+$indigo-lighter: lighten($indigo, 40);
+$indigo-lightest: lighten($indigo, 50);
 $purple:     #7753c8;
 $yellow:     #f7d07c;
 $yellow-light: lighten($yellow, 20);
@@ -21,3 +23,8 @@ $white:      #ffffff;
 
 $menu-height: 70px;
 $gutter-width: 30px;
+
+
+// font sizes
+
+$body-text-size: 14px;

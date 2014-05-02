@@ -1,8 +1,10 @@
 = image_tag @commit.image.url, class: 'card-image'
 
 = form_for Comment.new, remote: true, url: board_commit_comments_path(@board, @commit) do |f|
-  = f.text_area :body
-  = f.submit 'Comment!', id: 'add-comment'
+  .new-comment
+    = avatar_for current_user
+    = f.text_area :body
+    = f.submit 'Comment!', id: 'add-comment', class: 'btn btn-primary btn-small'
 
 %ul.comments
   = render @commit.comments

@@ -7,6 +7,7 @@ input[type=text], textarea {
   color: $gray;
   box-sizing: border-box;
   outline: none;
+  margin: 0 0 0 0;
 
   &:focus {
     border-color: $indigo-light;
@@ -24,10 +25,16 @@ input[type=text], textarea {
   -moz-box-sizing: border-box;
   cursor: pointer;
   outline: none;
+  margin: 0 0 0 0;
 
   &.btn-primary{
     background-color: $indigo;
     color: $white;
+  }
+
+  &.btn-small {
+    font-size: 14px;
+    padding: 10px 30px;
   }
 }
 
