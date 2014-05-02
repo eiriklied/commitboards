@@ -44,4 +44,13 @@ $commit-spacing: 60px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
   }
+
+  .meta {
+    position: absolute;
+    bottom: -20px;
+    right: $commit-spacing;
+    text-align: right;
+    font-size: $body-text-size;
+    color: $gray;
+  }
 }

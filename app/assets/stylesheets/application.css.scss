@@ -12,6 +12,8 @@
  *
  *
  */
+ @import "bootstrap-glyphicons";
+ @import "glyphicons-overrides";
  @import "animate";
  @import "animate-speeds";
  @import "variables";
@@ -20,4 +22,3 @@
  @import "utils";
  @import "menu";
  @import "pages/*";
- 

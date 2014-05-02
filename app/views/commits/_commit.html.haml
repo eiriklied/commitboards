@@ -8,3 +8,7 @@
   .author #{commit.user.name} on #{link_to_project(commit)} #{time_ago_in_words commit.committed_at} ago
   .message
     = link_to_commit_with_message commit
+
+  .meta
+    = commit.comments_count
+    %span.glyphicon.glyphicon-comment

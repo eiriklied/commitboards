@@ -34,4 +34,8 @@ class Commit < ActiveRecord::Base
   def organization
     github_path.present? ? github_path.split('/').first : nil
   end
+
+  def comments_count
+    super || 0
+  end
 end
