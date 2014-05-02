@@ -2,7 +2,7 @@ class Commit < ActiveRecord::Base
   belongs_to :board
   belongs_to :user
 
-  has_many :comments, -> { order('created_at asc') }
+  has_many :comments, -> { order('created_at asc').includes(:user) }
 
   validates :project, :sha, :committed_at,
              presence: true
