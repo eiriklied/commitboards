@@ -1,3 +1,4 @@
+# open card
 $(document).on 'click', 'ul.commits .image a', ->
   $('.js-card-overlay').removeClass('hidden')
   $.get $(this).attr('href'), (data) ->

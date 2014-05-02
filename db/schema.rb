@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140421211730) do
+ActiveRecord::Schema.define(version: 20140502091357) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 20140421211730) do
 
   add_index "boards", ["key"], name: "index_boards_on_key", unique: true
   add_index "boards", ["owner_id"], name: "index_boards_on_owner_id"
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "commit_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commit_id"], name: "index_comments_on_commit_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "commits", force: true do |t|
     t.string   "project"

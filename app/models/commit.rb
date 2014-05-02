@@ -2,6 +2,8 @@ class Commit < ActiveRecord::Base
   belongs_to :board
   belongs_to :user
 
+  has_many :comments
+
   validates :project, :sha, :committed_at,
              presence: true
   validates :board_id, :user_id, presence: true

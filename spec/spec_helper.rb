@@ -30,6 +30,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  config.include BrowserHelper
   config.include LoginHelper
   config.include CommitHelper
 end

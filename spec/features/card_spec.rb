@@ -10,12 +10,19 @@ describe 'Card' do
   end
 
   it 'should be possible to open a card for a commit' do
-    find('ul.commits .image a').click
+    find('ul.commits .image a').click # actually following the link that is usually fetched with js
     expect(current_path).to eql board_commit_path(@board, @commit)
   end
 
   it 'should be possible to comment on a commit' do
+    visit board_commit_path(@board, @commit)
 
+    fill_in 'comment_body', with: 'Haha nice selfie!'
+    click_on 'add-comment'
+
+    reload board_commit_path(@board, @commit)
+    expect(page).to have_content 'Haha nice selfie!'
+    expect(@commit.comments.length).to eql 1
   end
 
   it 'should be possible to like a commit' do

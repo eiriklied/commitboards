@@ -1,0 +1,3 @@
+<% if @comment.persisted? %>
+  $('.js-card').html('<%= j render('commits/show') %>');
+<% end %>

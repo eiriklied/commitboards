@@ -5,4 +5,8 @@ module ApplicationHelper
       "#{text} - "
     end
   end
+
+  def avatar_for(user)
+    image_tag user.avatar_url
+  end
 end
