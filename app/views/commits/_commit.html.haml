@@ -1,6 +1,9 @@
 %li{data:{commit_sha: commit.sha}}
   .image
-    = link_to board_commit_path(@board, commit), remote: true do
+    - if logged_in?
+      = link_to board_commit_path(@board, commit), remote: true do
+        = image_tag commit.image.url
+    - else
       = image_tag commit.image.url
   .author #{commit.user.name} on #{link_to_project(commit)} #{time_ago_in_words commit.committed_at} ago
   .message
