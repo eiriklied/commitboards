@@ -1,6 +1,5 @@
 # open card
 $(document).on 'click', '*[data-open-card]', ->
-  console.log 'OPEN!!'
   $('.js-card-overlay').removeClass('hidden')
   $.get $(this).attr('href'), (data) ->
     $('.js-card').html(data)
