@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140502091357) do
+ActiveRecord::Schema.define(version: 20140502104257) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20140502091357) do
     t.datetime "updated_at"
     t.string   "github_path"
     t.integer  "user_id"
+    t.integer  "comments_count"
   end
 
   add_index "commits", ["user_id"], name: "index_commits_on_user_id"
