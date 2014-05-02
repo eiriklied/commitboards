@@ -68,6 +68,10 @@ li.comment {
     border-top-right-radius: 4px;
     -moz-border-top-left-radius: 4px;
     -moz-border-top-right-radius: 4px;
+
+    a {
+      display: inline-block;
+    }
   }
   .comment-body {
     padding: 0 $body-text-size;

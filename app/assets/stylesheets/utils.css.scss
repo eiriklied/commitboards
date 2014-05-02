@@ -8,6 +8,14 @@
 
 .pull-right { float: right; }
 
+.row:before,
+.row:after {
+  display: table;
+  content: " ";
+}
+.row:after {
+  clear: both;
+}
 
 .alert, .notice {
   border-radius: 5px;

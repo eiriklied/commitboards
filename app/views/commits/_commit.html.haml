@@ -1,14 +1,19 @@
 %li{data:{commit_sha: commit.sha}}
-  .image
-    - if logged_in?
-      = link_to board_commit_path(@board, commit), remote: true do
-        = image_tag commit.image.url
-    - else
-      = image_tag commit.image.url
-  .author #{commit.user.name} on #{link_to_project(commit)} #{time_ago_in_words commit.committed_at} ago
-  .message
-    = link_to_commit_with_message commit
+  .commit
+    .row
+      .author #{commit.user.name} on #{link_to_project(commit)} #{time_ago_in_words commit.committed_at} ago
+    .row
+      .image
+        - if logged_in?
+          = link_to board_commit_path(@board, commit), data: {open_card: true} do
+            = image_tag commit.image.url
+        - else
+          = image_tag commit.image.url
+    .row
+      .meta
+        = link_to board_commit_path(@board, commit), data: {open_card: true} do
+          = commit.comments_count
+          %span.glyphicon.glyphicon-comment
 
-  .meta
-    = commit.comments_count
-    %span.glyphicon.glyphicon-comment
+      .message
+        = link_to_commit_with_message commit
