@@ -23,6 +23,7 @@ describe 'Card' do
     reload board_commit_path(@board, @commit)
     expect(page).to have_content 'Haha nice selfie!'
     expect(@commit.comments.length).to eql 1
+    expect(@commit.reload.comments_count).to eql 1 # counter_cache
   end
 
   it 'should be possible to like a commit' do
