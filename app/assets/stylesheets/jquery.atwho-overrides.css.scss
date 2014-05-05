@@ -1,0 +1,13 @@
+.atwho-view {
+  z-index: 200; // needs to be more than card
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  overflow: hidden;
+  font-size: $body-text-size;
+  .cur {
+    background-color: $indigo;
+  }
+
+  ul li {border: 0;}
+  strong { color: $indigo; }
+}

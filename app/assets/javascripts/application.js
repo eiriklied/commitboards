@@ -13,6 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.caret.min
+//= require jquery.atwho.min
+//= require emojis
 //= require hide-alerts-and-notices
 //= require menu
 //= require poll-for-changes
