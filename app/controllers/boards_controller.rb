@@ -3,6 +3,9 @@ class BoardsController < ApplicationController
   layout false, only: :incoming
 
   def show
+    unless logged_in?
+      flash.alert = "#{view_context.link_to 'Log in', new_session_from_board_path(@board)} to see and make comments!".html_safe
+    end
     # eager load users for fast page load
     @commits = @board.commits.includes(:user)
   end

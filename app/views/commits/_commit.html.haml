@@ -11,7 +11,11 @@
           = image_tag commit.image.url
     .row
       .meta
-        = link_to board_commit_path(@board, commit), data: {open_card: true} do
+        - if logged_in?
+          = link_to board_commit_path(@board, commit), data: {open_card: true} do
+            %span.comments-count= commit.comments_count
+            %span.glyphicon.glyphicon-comment
+        - else
           %span.comments-count= commit.comments_count
           %span.glyphicon.glyphicon-comment
 
