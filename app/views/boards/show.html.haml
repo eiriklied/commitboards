@@ -21,10 +21,11 @@
 
   #board{data: {incoming_url: incoming_board_path}}
     
-    %h1 Toppliste 
-    - @commits_pr_user.each do |key, value|
-      %span= key.name
-      %span= value
+    .leaderboard
+      %h3 Top commiters
+      .list
+        - @commits_pr_user.each_with_index do |(key,value),index|
+          = "#{index+1}. #{key.name} (#{value})"
 
     %ul.commits
       = render @commits

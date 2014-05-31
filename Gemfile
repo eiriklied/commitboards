@@ -50,6 +50,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'spring-commands-rspec'
+  gem 'priscilla'
+  gem "nyan-cat-formatter"
 end
 
 group :development do
