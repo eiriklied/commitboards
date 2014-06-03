@@ -1,14 +1,25 @@
-$commit-spacing: 60px;
+.leaderboard {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  width: 29.3%;
+  margin: 2%;
+  float: left;
+  background-color: $indigo-lighter;
+  padding-bottom: 20px;
+}
+
 .commits {
   list-style-type: none;
-  margin:0;
-  padding:0 0 0 $commit-spacing;
+  padding: 0;
   li{
-    width: 33.3%;
-    padding: $commit-spacing $commit-spacing 0 0;
+    width: 29.3%;
+    margin: 2%;
     float: left;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
+    
+    height: 0;
+    padding-bottom: 22%;
   }
   .commit {
     border-radius: 5px;
@@ -19,11 +30,8 @@ $commit-spacing: 60px;
     img {
       width: 100%;
       cursor: pointer;
+      display: block;
     }
-
-    // I hate this but can't find out whats pushing the
-    // rest of the content underneath down..
-    margin-bottom: -3px;
   }
   .author {
     padding: $body-text-size;
@@ -47,5 +55,34 @@ $commit-spacing: 60px;
     font-size: $body-text-size;
     color: $indigo;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 1200px) { 
+  .commits li {
+    padding-bottom: 25%;
+  }
+}
+
+@media screen and (max-width: 1000px) { 
+  .commits li {
+    padding-bottom: 30%;
+  }
+}
+
+@media screen and (max-width: 830px) { 
+  .commits li, .leaderboard  {
+    width: 46%;
+  }
+  .commits li { padding-bottom: 43%; }
+}
+
+@media screen and (max-width: 600px) {
+  .commits li, .leaderboard  {
+    width: 96%;
+  }
+  .commits li {
+    height: auto;
+    padding-bottom: 0;
   }
 }

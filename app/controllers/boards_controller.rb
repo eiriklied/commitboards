@@ -8,6 +8,7 @@ class BoardsController < ApplicationController
     end
     # eager load users for fast page load
     @commits = @board.commits.includes(:user)
+    @commits_pr_user = Commit.where("committed_at > ?", Time.now-1.week).group("user").order('count_id DESC').limit(3).count('id')
   end
 
   def incoming
