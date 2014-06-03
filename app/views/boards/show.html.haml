@@ -24,9 +24,9 @@
     - if @commits_pr_user.present?
       .leaderboard
         %h3 Top committers
-        .list
-          - @commits_pr_user.each_with_index do |(key,value),index|
-            = "#{index+1}. #{key.name} (#{value})"
+        %ol
+          - @commits_pr_user.each do |key,value|
+            %li= "#{key.name} (#{value})"
 
     %ul.commits
       = render @commits

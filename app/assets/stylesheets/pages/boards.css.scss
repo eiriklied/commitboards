@@ -6,6 +6,8 @@
   float: left;
   background-color: $indigo-lighter;
   padding-bottom: 20px;
+  ol { padding: 0 60px; }
+  li { padding: 10px 0; }
 }
 
 .commits {
@@ -17,7 +19,7 @@
     float: left;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
-    
+
     height: 0;
     padding-bottom: 22%;
   }
@@ -58,19 +60,19 @@
   }
 }
 
-@media screen and (max-width: 1200px) { 
+@media screen and (max-width: 1200px) {
   .commits li {
     padding-bottom: 25%;
   }
 }
 
-@media screen and (max-width: 1000px) { 
+@media screen and (max-width: 1000px) {
   .commits li {
     padding-bottom: 30%;
   }
 }
 
-@media screen and (max-width: 830px) { 
+@media screen and (max-width: 830px) {
   .commits li, .leaderboard  {
     width: 46%;
   }
