@@ -12,8 +12,13 @@ class Board < ActiveRecord::Base
     key
   end
 
-  def user_board_token_for(user)
-
+  def top_committers(from:)
+    Commit.where(board: self).
+           where('committed_at > ?', from).
+           group(:user).
+           order('count_id desc').
+           limit(3).
+           count('id')
   end
 
 private
