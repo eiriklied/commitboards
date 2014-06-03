@@ -12,9 +12,9 @@ class Board < ActiveRecord::Base
     key
   end
 
-  def top_committers(from:)
-    Commit.where(board: self).
-           where('committed_at > ?', from).
+  def top_committers
+    Commit.last_week.
+           where(board: self).
            group(:user).
            order('count_id desc').
            limit(3).

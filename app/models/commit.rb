@@ -19,6 +19,8 @@ class Commit < ActiveRecord::Base
   validates_attachment :image, content_type: { content_type: ['image/jpg', 'image/jpeg', 'image/png'] },
                                presence: true
 
+  scope :last_week, -> { where('committed_at > ?', 1.week.ago) }
+
   def to_param
     sha
   end
