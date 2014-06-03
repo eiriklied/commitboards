@@ -57,6 +57,7 @@ end
 group :development do
   gem 'foreman'
   gem 'heroku'
+  gem 'pg'
 end
 
 group :staging, :production do
