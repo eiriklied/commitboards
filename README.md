@@ -14,6 +14,11 @@
 
 ## Todos
 
+- Divide boards into weeks and top committers within each week
+- Create links directly to a commit
+- Email (async) when somebody comments on a commit you own
+- Email (async) when somebody comments on a commit you have commented on
+- Email (async) when somebody mentions you in a comment
 - write tests for install scripts (guessing full on integration tests is the only way to test this)
 - write tests for posting new commits to a board
 - Add summary for boards:
