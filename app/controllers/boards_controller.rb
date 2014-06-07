@@ -6,8 +6,8 @@ class BoardsController < ApplicationController
     unless logged_in?
       flash.alert = "#{view_context.link_to 'Log in', new_session_from_board_path(@board)} to see and make comments!".html_safe
     end
-    # eager load users for fast page load
-    @commits = @board.commits.last_week.includes(:user)
+    # same as for CommitsController#show
+    @commits = @board.commits.last_week
     @commits_pr_user = @board.top_committers
   end
 

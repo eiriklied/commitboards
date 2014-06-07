@@ -1,6 +1,6 @@
 class Board < ActiveRecord::Base
 
-  has_many :commits, -> { order(committed_at: :desc) }
+  has_many :commits, -> { order(committed_at: :desc).includes(:user) }
   belongs_to :owner, class_name: 'User'
 
   before_validation :generate_key_unless_present
