@@ -1,3 +1,6 @@
+$(document).pjax('a[data-open-card]', '.js-card');
+
+
 $(document).on 'card:initialize', '.js-card', ->
   $(document).find('.js-comment-body').atwho({
     at: ":",
@@ -8,11 +11,8 @@ $(document).on 'card:initialize', '.js-card', ->
 
 # open card
 $(document).on 'click', '*[data-open-card]', ->
-  $('.js-card-overlay').removeClass('hidden')
-  $.get $(this).attr('href'), (data) ->
-    $('.js-card').html(data)
-    $('.js-card').trigger('card:initialize');
-  return false
+  $('.js-card-overlay').removeClass('hidden');
+  $('.js-card').trigger('card:initialize');
 
 # close card
 $(document).on 'click', '.js-card-overlay', (e)->

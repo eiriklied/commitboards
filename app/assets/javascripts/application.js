@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.pjax
 //= require jquery.caret.min
 //= require jquery.atwho.min
 //= require emojis
