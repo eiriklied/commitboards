@@ -16,11 +16,20 @@ class CommitsController < ApplicationController
 
   def show
     @commit = @board.commits.find_by(sha: params[:id])
-    render '_show.html.haml', layout: false
+    # Same as for BoardsController#show
+    @commits = @board.commits.last_week
+    @commits_pr_user = @board.top_committers
+
+    if request.xhr?
+      render '_show.html.haml', layout: false
+    else
+      render 'boards/show'
+    end
   end
 
 
 private
+
   def load_board
     @board = Board.find_by key: params[:board_id]
   end

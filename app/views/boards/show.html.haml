@@ -31,6 +31,14 @@
     %ul.commits
       = render @commits
 
+-# user is coming directly for a commit from outside the app
+- if @commit.present?
+  :javascript
+    $(window).on('load', function() {
+      $('li[data-commit-sha=#{@commit.sha}] [data-open-card]').trigger('click');
+    });
+
+
 = content_for :bottom do
   .card-overlay.js-card-overlay.hidden
     .card.js-card
