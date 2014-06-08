@@ -19,7 +19,7 @@
 
         %p You can install this commitboard to as many git projects as you like.
 
-  #board{data: {incoming_url: incoming_board_path(@board)}}
+  #board{data: {incoming_url: incoming_board_path(@board), board_url: board_path(@board)}}
 
     - if @commits_pr_user.present?
       .leaderboard
