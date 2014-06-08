@@ -15,12 +15,12 @@ describe 'Card' do
   end
 
   it 'should be possible to comment on a commit' do
-    visit board_commit_path(@board, @commit)
+    visit board_commit_path(@board, @commit, _show_commit_card: true)
 
     fill_in 'comment_body', with: 'Haha nice selfie!'
     click_on 'add-comment'
 
-    reload board_commit_path(@board, @commit)
+    reload board_commit_path(@board, @commit, _show_commit_card: true)
     expect(page).to have_content 'Haha nice selfie!'
     expect(@commit.comments.length).to eql 1
     expect(@commit.reload.comments_count).to eql 1 # counter_cache

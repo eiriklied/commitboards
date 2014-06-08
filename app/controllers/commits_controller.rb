@@ -20,7 +20,7 @@ class CommitsController < ApplicationController
     @commits = @board.commits.last_week
     @commits_pr_user = @board.top_committers
 
-    if request.xhr?
+    if show_commit_card?
       render '_show.html.haml', layout: false
     else
       render 'boards/show'
@@ -29,6 +29,10 @@ class CommitsController < ApplicationController
 
 
 private
+
+  def show_commit_card?
+    request.xhr? || params[:_show_commit_card]
+  end
 
   def load_board
     @board = Board.find_by key: params[:board_id]
