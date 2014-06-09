@@ -6,6 +6,7 @@
   overflow-y: auto;
 }
 .card {
+  position: relative;
   width: 600px;
   background-color: $white;
   min-height: 600px;
@@ -16,6 +17,20 @@
   -moz-border-radius: 5px;
   padding: $gutter-width;
   background-color: $indigo-lightest;
+}
+.card-header {
+
+}
+.close-card {
+  position: absolute;
+  padding: 5px;
+  top: 4px;
+  right: 4px;
+  cursor: pointer;
+  color: $gray-light;
+  -webkit-transition: color 150ms;
+  transition: color 150ms;
+  &:hover { color: $gray; }
 }
 
 .card-image {

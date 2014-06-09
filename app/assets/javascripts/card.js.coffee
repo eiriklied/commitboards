@@ -22,8 +22,17 @@ $(document).on 'click', '*[data-open-card]', ->
   return false
 
 # close card
-$(document).on 'click', '.js-card-overlay', (e)->
-  return unless $(this).is(e.target)
+$(document).on 'card:close', ->
   updateUrl($('#board').data('board-url'))
   $('.js-card-overlay').addClass('hidden')
   $('.js-card').html('') # clear card contents for later
+
+
+# both the overlay and the close button
+$(document).on 'click', '.js-close-card', (e)->
+  return unless $(this).is(e.target)
+  $('.js-card').trigger('card:close')
+
+$(document).on 'keyup', '.js-card', (e) ->
+  return unless e.keyCode == 27 # esc
+  $('.js-card').trigger('card:close')

@@ -9,7 +9,7 @@ module CommitsHelper
     msg = truncate(commit.message)
     if commit.github_path.present?
       link_to github_commit_url(commit), target: '_blank', rel: 'new', title: commit.message do
-        truncate(commit.message) + '<span class="glyphicon glyphicon-share-alt"/>'.html_safe
+        truncate(commit.message) + ' <span class="glyphicon glyphicon-share-alt"/>'.html_safe
       end
     else
       msg
