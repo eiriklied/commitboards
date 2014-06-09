@@ -15,11 +15,11 @@
   display:block;
   border-radius: 5px;
   -moz-border-radius: 5px;
-  padding: $gutter-width;
+  padding: $gutter-width-mini $gutter-width $gutter-width;
   background-color: $indigo-lightest;
 }
 .card-header {
-
+  margin-bottom: $gutter-width-mini;
 }
 .close-card {
   position: absolute;

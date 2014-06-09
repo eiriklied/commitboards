@@ -1,5 +1,7 @@
 %span.glyphicon.glyphicon-remove.close-card.js-close-card
-  
+.card-header
+  .h3= link_to_commit_with_message @commit
+
 = image_tag @commit.image.url, class: 'card-image'
 
 %ul.comments
