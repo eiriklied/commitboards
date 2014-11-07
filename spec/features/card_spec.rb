@@ -4,6 +4,7 @@ describe 'Card' do
   let(:user)    { User.find_by email: 'jim@test.com' }
   let(:board)   { create :board, owner: user }
   let(:commit)  { board.commits.last }
+
   before :each do
     login_as email: 'jim@test.com'
     create :commit, user: user, board: board
