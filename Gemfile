@@ -57,6 +57,9 @@ group :development, :test do
   gem 'simplecov'
   gem 'guard'
   gem 'guard-rspec'
+  gem 'factory_girl_rails'
+  gem 'factory_girl', github: 'nicohvi/factory_girl'
+  gem 'database_cleaner'
 end
 
 group :development do
