@@ -15,3 +15,7 @@
 /log/*.log
 /tmp
 public/system/
+
+# Ignore coverage reports
+/coverage/**/*.json
+/coverage/**/*.html
