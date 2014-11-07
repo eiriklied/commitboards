@@ -39,5 +39,4 @@ RSpec.configure do |config|
   
   config.include BrowserHelper
   config.include LoginHelper
-  config.include CommitHelper
 end

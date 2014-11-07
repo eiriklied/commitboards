@@ -7,6 +7,11 @@ describe BoardsController do
     create :user_with_board
     create_list :user_with_commits, 4
   end
+
+  after :all do
+    User.destroy_all
+    Board.destroy_all
+  end
   
   describe 'GET show' do
     
