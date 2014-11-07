@@ -47,6 +47,9 @@ GEM
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
+    bourbon (3.2.3)
+      sass (~> 3.2)
+      thor
     builder (3.2.2)
     byebug (3.5.1)
       columnize (~> 0.8)
@@ -267,6 +270,7 @@ DEPENDENCIES
   awesome_print
   aws-sdk
   better_errors
+  bourbon
   byebug
   capybara
   capybara-webkit

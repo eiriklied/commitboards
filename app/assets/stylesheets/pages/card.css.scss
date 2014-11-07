@@ -1,3 +1,5 @@
+@import 'bourbon';
+
 .card-overlay {
   position: fixed;
   z-index: 100;
@@ -18,6 +20,7 @@
   padding: $gutter-width-mini $gutter-width $gutter-width;
   background-color: $indigo-lightest;
 }
+
 .card-header {
   margin-bottom: $gutter-width-mini;
 }
@@ -69,6 +72,7 @@ li.comment {
   -moz-border-radius: 5px;
   border: 1px solid $indigo-lighter;
   font-size: $body-text-size;
+  @include transition(all .3s ease-in-out);
 
   .avatar {
     position: absolute;
@@ -83,6 +87,7 @@ li.comment {
     border-top-right-radius: 4px;
     -moz-border-top-left-radius: 4px;
     -moz-border-top-right-radius: 4px;
+    @include transition(all .3s ease-in-out);
 
     a {
       display: inline-block;
@@ -92,3 +97,6 @@ li.comment {
     padding: 0 $body-text-size;
   }
 }
+
+.comment.updated { background-color: $off-white; }
+.comment.updated .comment-meta { background-color: $indigo-light; }

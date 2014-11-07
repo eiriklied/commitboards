@@ -30,7 +30,7 @@ Commitboards::Application.routes.draw do
       get :incoming
     end
     resources :commits, only: [:create, :show] do
-      resources :comments, only: [:create, :edit]
+      resources :comments, only: [:create, :update]
     end
   end
 

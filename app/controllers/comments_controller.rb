@@ -2,12 +2,19 @@ class CommentsController < ApplicationController
   before_filter :require_login
   before_filter :load_board
   before_filter :load_commit
+  respond_to :html, :json
 
   def create
     @comment = @commit.comments.build(comment_params)
     @comment.user = current_user
     @comment.save!
     render 'create.js.erb'
+  end
+
+  def update
+    @comment = Comment.find(params[:id])
+    @comment.update(comment_params)
+    respond_with(@comment)  
   end
 
 private
