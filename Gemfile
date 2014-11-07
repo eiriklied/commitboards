@@ -1,11 +1,10 @@
 source 'https://rubygems.org'
 
-ruby '2.1.1'
+ruby '2.1.3'
 
 gem 'dotenv-rails', group: [:development, :test]
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.5'
+gem 'rails', '4.1.7'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -51,26 +50,21 @@ group :development, :test do
   gem 'capybara'
   gem 'spring-commands-rspec'
   gem 'priscilla'
+  gem 'byebug'
+  gem 'coffee-rails-source-maps'
+  gem 'better_errors'
+  gem 'awesome_print' # better object inspection
+  gem 'simplecov'
+  gem 'guard'
+  gem 'guard-rspec'
 end
 
 group :development do
   gem 'foreman'
-  gem 'heroku'
+  # gem 'heroku' replaced by heroku cli.
 end
 
 group :staging, :production do
   gem 'rails_12factor' # https://devcenter.heroku.com/articles/rails-integration-gems
   gem 'pg'
 end
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
