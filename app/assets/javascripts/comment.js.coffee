@@ -5,11 +5,6 @@ class CommentForm
     @body = @el.find('.comment-body p')
     @body.prop('contenteditable', true)
     @body.focus()
-    @initHandler()
-
-  initHandler: ->
-    $(document).on 'keyup', '.comment-body', (e) =>
-      @submit() if e.which == 13
 
   submit: ->
     # remove whitespace and newlines
@@ -33,7 +28,11 @@ class CommentForm
       # We'll handle this later
     ).done()
 
-$(document).on 'click', '.edit-comment', (e) ->
+$(document).on 'click', '.edit-comment', (e) =>
   e.preventDefault()
-  new CommentForm($(@).parents('.comment:first'), $(@).attr('href'))
-  
+  @commentForm = new CommentForm($(e.target).parents('.comment:first'), $(e.target).attr('href'))
+
+$(document).on 'keyup', '.comment-body', (e) =>
+  @commentForm.submit() if e.which == 13
+
+
