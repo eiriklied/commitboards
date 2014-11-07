@@ -68,8 +68,6 @@ GEM
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
-    coffee-rails-source-maps (1.4.0)
-      coffee-script-source (>= 1.6.1)
     coffee-script (2.3.0)
       coffee-script-source
       execjs
@@ -118,6 +116,8 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     jwt (1.0.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     listen (2.7.11)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -250,8 +250,6 @@ GEM
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
-    turbolinks (2.5.1)
-      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.5.3)
@@ -270,7 +268,6 @@ DEPENDENCIES
   byebug
   capybara
   coffee-rails (~> 4.0.0)
-  coffee-rails-source-maps
   database_cleaner
   dotenv-rails
   factory_girl!
@@ -282,6 +279,7 @@ DEPENDENCIES
   haml
   jbuilder (~> 1.2)
   jquery-rails
+  launchy
   octokit (~> 2.0)
   paperclip
   pg
@@ -298,5 +296,4 @@ DEPENDENCIES
   sorcery
   spring-commands-rspec
   sqlite3
-  turbolinks
   uglifier (>= 1.3.0)

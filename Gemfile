@@ -29,9 +29,6 @@ gem 'gemoji'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
@@ -51,7 +48,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'priscilla'
   gem 'byebug'
-  gem 'coffee-rails-source-maps'
+  # gem 'coffee-rails-source-maps'
   gem 'better_errors'
   gem 'awesome_print' # better object inspection
   gem 'simplecov'
@@ -60,6 +57,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'factory_girl', github: 'nicohvi/factory_girl'
   gem 'database_cleaner'
+  gem 'launchy' # to save and view screenshots by capybara
 end
 
 group :development do

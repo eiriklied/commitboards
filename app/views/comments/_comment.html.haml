@@ -4,5 +4,7 @@
   .comment-meta
     = link_to comment.user.name, comment.user.github_url, rel: 'new', target: '_blank'
     #{time_ago_in_words comment.updated_at} ago
+    = link_to edit_board_commit_comment_path(@board, @commit, comment), class: 'edit-comment' do
+      edit
   .comment-body
     = simple_format emojify(comment.body)

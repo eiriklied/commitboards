@@ -28,7 +28,15 @@ describe 'Card' do
     expect(commit.reload.comments_count).to eql 1 # counter_cache
   end
 
-  it 'should be possible to edit your own commit comment'
+  it 'should be possible to edit your own commit comment' do
+    create :comment, commit: commit, user: user
+    visit board_commit_path(board, commit, _show_commit_card: true)
+    pr page.body
+    first('.comment').click_on 'edit'
+    first('.comment').fill_in 'comment-body', with: 'new text!'
+    expect(commit.comments.last.body).to eq('new text!')
+  end
+
   it 'should be possible to delete your own commit comment'
   it 'should be possible to like a commit'
 

@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require q
 //= require jquery.caret.min
 //= require jquery.atwho.min
 //= require emojis
@@ -20,3 +20,4 @@
 //= require menu
 //= require poll-for-changes
 //= require card
+//= require comment
