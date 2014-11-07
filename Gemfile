@@ -40,11 +40,12 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'pg'
+
 group :development, :test do
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'spring-commands-rspec'
   gem 'priscilla'
   gem 'byebug'
@@ -67,5 +68,4 @@ end
 
 group :staging, :production do
   gem 'rails_12factor' # https://devcenter.heroku.com/articles/rails-integration-gems
-  gem 'pg'
 end

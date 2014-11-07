@@ -28,7 +28,13 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.start
+  end
+
+  # Since the web server and the application are running
+  # in different threads we need to ensure that there are no
+  # database corruptions.
+  config.before(:each, :js => true) do
+    DatabaseCleaner.strategy = :truncation
   end
 
   config.after(:each) do
@@ -36,6 +42,9 @@ RSpec.configure do |config|
   end
 
   config.infer_spec_type_from_file_location!
+  
+  # use webkit as the driver
+  Capybara.javascript_driver = :webkit
   
   config.include BrowserHelper
   config.include LoginHelper

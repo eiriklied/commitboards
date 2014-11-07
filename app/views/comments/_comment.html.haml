@@ -6,5 +6,5 @@
     #{time_ago_in_words comment.updated_at} ago
     = link_to edit_board_commit_comment_path(@board, @commit, comment), class: 'edit-comment' do
       edit
-  .comment-body
+  .comment-body{ id: "comment-#{comment.id}" }
     = simple_format emojify(comment.body)

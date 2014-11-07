@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140502104257) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
     t.string   "provider",   null: false
@@ -29,8 +32,8 @@ ActiveRecord::Schema.define(version: 20140502104257) do
     t.integer  "owner_id"
   end
 
-  add_index "boards", ["key"], name: "index_boards_on_key", unique: true
-  add_index "boards", ["owner_id"], name: "index_boards_on_owner_id"
+  add_index "boards", ["key"], name: "index_boards_on_key", unique: true, using: :btree
+  add_index "boards", ["owner_id"], name: "index_boards_on_owner_id", using: :btree
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -40,8 +43,8 @@ ActiveRecord::Schema.define(version: 20140502104257) do
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["commit_id"], name: "index_comments_on_commit_id"
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+  add_index "comments", ["commit_id"], name: "index_comments_on_commit_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "commits", force: true do |t|
     t.string   "project"
@@ -60,7 +63,7 @@ ActiveRecord::Schema.define(version: 20140502104257) do
     t.integer  "comments_count"
   end
 
-  add_index "commits", ["user_id"], name: "index_commits_on_user_id"
+  add_index "commits", ["user_id"], name: "index_commits_on_user_id", using: :btree
 
   create_table "user_board_tokens", force: true do |t|
     t.integer  "user_id",    null: false
@@ -70,9 +73,9 @@ ActiveRecord::Schema.define(version: 20140502104257) do
     t.datetime "updated_at"
   end
 
-  add_index "user_board_tokens", ["board_id"], name: "index_user_board_tokens_on_board_id"
-  add_index "user_board_tokens", ["key"], name: "index_user_board_tokens_on_key", unique: true
-  add_index "user_board_tokens", ["user_id"], name: "index_user_board_tokens_on_user_id"
+  add_index "user_board_tokens", ["board_id"], name: "index_user_board_tokens_on_board_id", using: :btree
+  add_index "user_board_tokens", ["key"], name: "index_user_board_tokens_on_key", unique: true, using: :btree
+  add_index "user_board_tokens", ["user_id"], name: "index_user_board_tokens_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -87,6 +90,6 @@ ActiveRecord::Schema.define(version: 20140502104257) do
     t.string   "github_url"
   end
 
-  add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"
+  add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree
 
 end
