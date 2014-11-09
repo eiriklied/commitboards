@@ -12,7 +12,8 @@ class CommentsController < ApplicationController
   end
 
   def update
-    @comment = Comment.find(params[:id])
+    @comment = @commit.comments.find(params[:id])
+    return render nothing: true, status: 401 unless @comment.user  == current_user
     @comment.update(comment_params)
     respond_with(@comment)  
   end

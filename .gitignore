@@ -17,5 +17,4 @@
 public/system/
 
 # Ignore coverage reports
-/coverage/**/*.json
-/coverage/**/*.html
+/coverage
