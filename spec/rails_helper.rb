@@ -4,6 +4,8 @@ require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 require 'rspec/rails'
+require 'capybara/poltergeist'
+
 # Checks for pending migrations before tests are run.
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -48,7 +50,7 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   
   # use webkit as the driver
-  Capybara.javascript_driver = :webkit
+  Capybara.javascript_driver = :poltergeist
   
   config.include BrowserHelper
   config.include LoginHelper

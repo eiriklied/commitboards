@@ -44,7 +44,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'capybara-webkit'
+  gem 'poltergeist'
   gem 'spring-commands-rspec'
   gem 'priscilla'
   gem 'byebug'
