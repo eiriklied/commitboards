@@ -1,3 +1,5 @@
+- comment ||= @comment
+
 %li.comment
   = link_to comment.user.github_url, rel: 'new', target: '_blank' do
     = avatar_for comment.user
@@ -8,3 +10,4 @@
       edit
   .comment-body{ id: "comment-#{comment.id}" }
     = simple_format emojify(comment.body)
+  = render 'comments/form', comment: comment

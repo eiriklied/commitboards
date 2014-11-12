@@ -3,19 +3,19 @@ class CommentsController < ApplicationController
   before_filter :load_board
   before_filter :load_commit
   respond_to :html, :json
+  layout false
 
   def create
-    @comment = @commit.comments.build(comment_params)
-    @comment.user = current_user
-    @comment.save!
-    render 'create.js.erb'
+    @comment = @commit.comments.build comment_params.merge({ user: current_user })
+    @comment.save
+    render '_comment'  
   end
 
   def update
     @comment = @commit.comments.find(params[:id])
     return render nothing: true, status: 401 unless @comment.user  == current_user
     @comment.update(comment_params)
-    respond_with(@comment)  
+    render '_comment'
   end
 
 private

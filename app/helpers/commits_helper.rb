@@ -23,4 +23,5 @@ module CommitsHelper
   def github_commit_url(commit)
     "#{github_project_url(commit)}/commit/#{commit.sha}"
   end
+
 end

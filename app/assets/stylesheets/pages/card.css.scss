@@ -43,7 +43,7 @@
 }
 
 .card {
-  .new-comment {
+  form {
     position: relative;
     margin-top: $gutter-width;
     margin-left:40px + $body-text-size;
@@ -59,11 +59,16 @@
   }
 }
 
+.card .edit_comment {
+  margin: 10px;
+}
+
 ul.comments {
   list-style-type: none;
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
+  margin: 0;
+  padding: 0;
 }
+
 li.comment {
   position: relative;
   margin-left: 40px + $body-text-size;
@@ -97,6 +102,8 @@ li.comment {
     padding: 0 $body-text-size;
   }
 }
+
+.comment form { display: none; }
 
 .comment.updated { background-color: $off-white; }
 .comment.updated .comment-meta { background-color: $indigo-light; }

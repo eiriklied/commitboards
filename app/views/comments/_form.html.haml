@@ -1,0 +1,5 @@
+= form_for [@board, @commit, comment], remote: true do |f|
+  = avatar_for current_user if comment.new_record?
+  = f.text_area :body, class: 'input-small js-comment-body', placeholder: 'Say what?'
+  = f.button 'Cancel', id: 'js-cancel', class: 'btn btn-secondary btn-small' unless comment.new_record?
+  = f.submit 'Comment!', class: 'btn btn-primary btn-small'
