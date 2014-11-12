@@ -7,15 +7,21 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commit.comments.build comment_params.merge({ user: current_user })
-    @comment.save
-    render '_comment'  
+    if @comment.save
+      render '_comment'  
+    else
+      render nothing: true, status: 401
+    end
   end
 
   def update
     @comment = @commit.comments.find(params[:id])
     return render nothing: true, status: 401 unless @comment.user  == current_user
-    @comment.update(comment_params)
-    render '_comment'
+    if @comment.update(comment_params)
+      render '_comment'
+    else
+      render nothing: true, status: 401
+    end
   end
 
 private
