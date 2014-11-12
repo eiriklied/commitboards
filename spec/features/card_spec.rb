@@ -19,7 +19,7 @@ describe 'Card' do
   it 'should be possible to comment on a commit', js: true do
     visit board_commit_path(board, commit, _show_commit_card: true)
 
-    fill_in 'comment_body', with: 'Haha nice selfie!'
+    fill_in 'comment_body', with: 'Haha nice selfie :+1:!'
     click_on 'add-comment'
 
     reload board_commit_path(board, commit, _show_commit_card: true)
