@@ -21,8 +21,9 @@ $(document).on 'ajax:success', '.new_comment', (e, data, status, xhr) ->
 
 $(document).on 'ajax:success', '.edit_comment', (e, data, status, xhr) ->
   $comment = $(@).parents('.comment:first')
-  $comment.find('p').html $(data).find('p').html()
-  $comment.find('.comment-body').show()
+  $body = $comment.find('.comment-body')
+  $body.html $(data).find('.comment-body').html()
+  $body.show()
   $comment.find('form').hide()
 
 
