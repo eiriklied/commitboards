@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require q
 //= require jquery.caret.min
 //= require jquery.atwho.min
 //= require emojis
