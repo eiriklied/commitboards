@@ -27,7 +27,6 @@ $(document).on 'card:close', ->
   $('.js-card-overlay').addClass('hidden')
   $('.js-card').html('') # clear card contents for later
 
-
 # both the overlay and the close button
 $(document).on 'click', '.js-close-card', (e)->
   return unless $(this).is(e.target)

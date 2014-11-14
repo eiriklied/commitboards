@@ -1,8 +1,13 @@
+- comment ||= @comment
+
 %li.comment
   = link_to comment.user.github_url, rel: 'new', target: '_blank' do
     = avatar_for comment.user
   .comment-meta
     = link_to comment.user.name, comment.user.github_url, rel: 'new', target: '_blank'
     #{time_ago_in_words comment.updated_at} ago
-  .comment-body
+    = link_to board_commit_comment_path(@board, @commit, comment), class: 'edit-comment', disabled: true do
+      edit
+  .comment-body{ id: "comment-#{comment.id}" }
     = simple_format emojify(comment.body)
+  = render 'comments/form', comment: comment

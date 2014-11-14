@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'downloads' do
   it 'should always be able to display a script version' do

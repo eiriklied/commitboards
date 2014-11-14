@@ -11,4 +11,9 @@ module ApplicationHelper
     url = user.avatar_url + {s: retina_size}.to_query
     image_tag url, height: size, width: size, class: 'avatar'
   end
+
+  def icon_for(name)
+    content_tag(:i, name, class: name)
+  end
+
 end
