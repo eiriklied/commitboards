@@ -18,6 +18,7 @@ $(document).on 'ajax:success', '.new_comment', (e, data, status, xhr) ->
   $(@).find('textarea').val('')
   $('.js-card').trigger('card:initialize') if $('.comment').length == 1 
   $("li[data-commit-sha='#{$commit}']").find('.comments-count').text($('.comment').length)
+  $('.js-card').trigger 'card:initialize'
 
 $(document).on 'ajax:success', '.edit_comment', (e, data, status, xhr) ->
   $comment = $(@).parents('.comment:first')
@@ -25,5 +26,6 @@ $(document).on 'ajax:success', '.edit_comment', (e, data, status, xhr) ->
   $body.html $(data).find('.comment-body').html()
   $body.show()
   $comment.find('form').hide()
+  $('.js-card').trigger 'card:initialize'
 
 

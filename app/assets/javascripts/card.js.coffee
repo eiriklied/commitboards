@@ -33,5 +33,6 @@ $(document).on 'click', '.js-close-card', (e)->
   $('.js-card').trigger('card:close')
 
 $(document).on 'keyup', '.js-card', (e) ->
+  debugger
   return unless e.keyCode == 27 # esc
   $('.js-card').trigger('card:close')
