@@ -32,6 +32,10 @@ input[type=text], textarea {
   outline: none;
   margin: 0 0 0 0;
 
+  -webkit-appearance: none;
+  -moz-appearance:    none;
+  appearance:         none;
+
   &.btn-primary{
     background-color: $indigo;
     color: $white;
@@ -52,4 +56,11 @@ input.code-example {
   width: 900px;
   text-align: center;
   font-family: 'Courier New';
+}
+
+@media (max-width: $phone-breakpoint) {
+  input[type=text], input[type=submit], textarea {
+    width: 100%;
+    margin-bottom: $gutter-width-mini;
+  }
 }

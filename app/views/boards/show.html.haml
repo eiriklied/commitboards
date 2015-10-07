@@ -21,7 +21,7 @@
 
   #board{data: {incoming_url: incoming_board_path(@board), board_url: board_path(@board)}}
 
-    - if @commits_pr_user.present?
+    -# if @commits_pr_user.present?
       .leaderboard
         %h3 Top committers
         %ol
@@ -35,7 +35,7 @@
 - if @commit.present?
   :javascript
     $(window).on('load', function() {
-      $('li[data-commit-sha=#{@commit.sha}] [data-open-card]').trigger('click');
+      $('li[data-commit-sha=#{j @commit.sha}] [data-open-card]').trigger('click');
     });
 
 

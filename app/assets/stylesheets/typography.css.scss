@@ -53,3 +53,9 @@ ul {
 li {
 
 }
+
+@media (max-width: $phone-breakpoint) {
+  body {
+    font-size: $body-text-size;
+  }
+}

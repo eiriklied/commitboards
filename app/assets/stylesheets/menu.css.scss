@@ -32,3 +32,9 @@
 .with-menu {
   padding-top: $menu-height;
 }
+
+@media (max-width: $phone-breakpoint) {
+  .menu-items {
+    margin-top:15px;
+  }
+}

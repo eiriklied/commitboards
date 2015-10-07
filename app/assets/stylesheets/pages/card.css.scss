@@ -17,6 +17,8 @@
   display:block;
   border-radius: 5px;
   -moz-border-radius: 5px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
   padding: $gutter-width-mini $gutter-width $gutter-width;
   background-color: $indigo-lightest;
 }
@@ -107,3 +109,9 @@ li.comment {
 
 .comment.updated { background-color: $off-white; }
 .comment.updated .comment-meta { background-color: $indigo-light; }
+
+@media (max-width: $phone-breakpoint) {
+  .card {
+    width: 96%;
+  }
+}

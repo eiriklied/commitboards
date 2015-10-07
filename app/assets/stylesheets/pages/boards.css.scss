@@ -12,16 +12,14 @@
 
 .commits {
   list-style-type: none;
-  padding: 0;
-  li{
-    width: 29.3%;
-    margin: 2%;
-    float: left;
+  padding: $menu-height 0 0;
+  li {
+    width: 50%;
+    max-width: 400px;
+    margin: 2% auto;
+    float: none;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
-
-    height: 0;
-    padding-bottom: 22%;
   }
   .commit {
     border-radius: 5px;
@@ -60,31 +58,12 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
-  .commits li {
-    padding-bottom: 25%;
-  }
-}
 
-@media screen and (max-width: 1000px) {
-  .commits li {
-    padding-bottom: 30%;
-  }
-}
-
-@media screen and (max-width: 830px) {
-  .commits li, .leaderboard  {
-    width: 46%;
-  }
-  .commits li { padding-bottom: 43%; }
-}
-
-@media screen and (max-width: 600px) {
+@media (max-width: $phone-breakpoint) {
   .commits li, .leaderboard  {
     width: 96%;
   }
   .commits li {
     height: auto;
-    padding-bottom: 0;
   }
 }
