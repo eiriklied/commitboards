@@ -4,6 +4,10 @@
 
 ## Install locally
 
+Note that in addition to the regular postgres database you need redis running.
+Either on the default 127.0.0.1:6379 or on `REDIS_URL` (which is set if you
+install redis with `heroku addons:create heroku-redis:hobby-dev`)
+
     # setup database
     [bundle exec] rake db:migrate
     # run the one test
@@ -30,6 +34,8 @@
 
 ### Done
 
+- Publish new commits to boards realtime
+- Fix empty boards getting new commits
 - names (and commit messages??) with æøå f*#%s up the script with shellescape problems. Maybe # encoding: utf-8 will solve the problem? Need a terminal with US-ASCII encoding
 - known bug: sometimes a computer comes back from offline
   - it uploads many commits, where the oldest commits are uploaded last.

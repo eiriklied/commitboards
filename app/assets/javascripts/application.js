@@ -14,9 +14,10 @@
 //= require jquery_ujs
 //= require jquery.caret.min
 //= require jquery.atwho.min
+//= require message-bus
 //= require emojis
 //= require hide-alerts-and-notices
 //= require menu
-//= require poll-for-changes
+//= require board
 //= require card
 //= require comment

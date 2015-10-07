@@ -4,15 +4,12 @@
       .author #{commit.user.name} on #{link_to_project(commit)} #{time_ago_in_words commit.committed_at} ago
     .row
       .image
-        - if logged_in?
-          = link_to board_commit_path(@board, commit), data: {open_card: true} do
-            = image_tag commit.image.url
-        - else
+        = link_to board_commit_path(commit.board, commit), data: {open_card: true} do
           = image_tag commit.image.url
     .row
       .meta
         - if logged_in?
-          = link_to board_commit_path(@board, commit), data: {open_card: true} do
+          = link_to board_commit_path(commit.board, commit), data: {open_card: true} do
             %span.comments-count= commit.comments_count
             %span.glyphicon.glyphicon-comment
         - else

@@ -11,15 +11,6 @@ class BoardsController < ApplicationController
     @commits_pr_user = @board.top_committers
   end
 
-  def incoming
-    @last_commit = @board.commits.find_by(sha: params[:commit_sha])
-    if  @last_commit.blank?
-      render nothing: true
-    else
-      @incoming_commits = @board.commits.where('committed_at > ?', @last_commit.committed_at)
-    end
-  end
-
   def create
     @board = Board.new(board_params.merge(owner: current_user))
     if @board.save

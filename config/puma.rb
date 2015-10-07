@@ -15,4 +15,6 @@ on_worker_boot do
     config['pool']              = ENV['DB_POOL'] || 10
     ActiveRecord::Base.establish_connection(config)
   end
+
+  MessageBus.after_fork
 end

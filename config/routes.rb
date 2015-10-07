@@ -24,9 +24,6 @@ Commitboards::Application.routes.draw do
   get ':board_id/install/:token' => 'scripts#install'
 
   resources :boards, path: '/', only: [:show, :create] do
-    member do
-      get :incoming
-    end
     resources :commits, only: [:create, :show] do
       resources :comments, only: [:create, :update]
     end

@@ -1,0 +1,3 @@
+var $newestCommit = $('<%= j render(partial: "commit", object: @commit) %>');
+$('ul.commits').prepend($newestCommit);
+$newestCommit.addClass('animated bounceInDown animate-fast');

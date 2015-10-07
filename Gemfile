@@ -22,6 +22,7 @@ gem 'settingslogic'
 gem 'sorcery'
 gem 'octokit', '~> 2.0'
 gem 'gemoji'
+gem 'message_bus'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

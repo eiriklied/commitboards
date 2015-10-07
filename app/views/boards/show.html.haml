@@ -19,14 +19,14 @@
 
         %p You can install this commitboard to as many git projects as you like.
 
-  #board{data: {incoming_url: incoming_board_path(@board), board_url: board_path(@board)}}
+  #board.js-live-board{data: {key: @board.key}}
 
-    -# if @commits_pr_user.present?
-      .leaderboard
-        %h3 Top committers
-        %ol
-          - @commits_pr_user.each do |key,value|
-            %li= "#{key.name} (#{value})"
+    -# - if @commits_pr_user.present?
+    -#   .leaderboard
+    -#     %h3 Top committers
+    -#     %ol
+    -#       - @commits_pr_user.each do |key,value|
+    -#         %li= "#{key.name} (#{value})"
 
     %ul.commits
       = render @commits

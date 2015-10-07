@@ -7,14 +7,22 @@ class CommitsController < ApplicationController
   def create
     logger.info "Incoming commit with script version #{request.headers['X-script-version']}"
 
-    success = Commit.create!(commit_params.merge(
+    @commit = Commit.create!(commit_params.merge(
       user: @user_board.user,
       board: @user_board.board
     ))
+
+    MessageBus.publish "/board/#{@user_board.board.key}", render_to_string('append_commit.js.erb')
+
     render text: 'ok'
   end
 
   def show
+    unless logged_in?
+      render 'not_logged_in', layout: false
+      return
+    end
+    
     @commit = @board.commits.find_by(sha: params[:id])
     # Same as for BoardsController#show
     @commits = @board.commits.last_week
